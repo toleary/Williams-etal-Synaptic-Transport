@@ -1,0 +1,234 @@
+\documentclass[fleqn,10pt]{wlpeerj}
+\title{Article Title}
+
+\author[1,2]{Alex H Williams}
+\author[2]{Cian O'Donnell}
+\author[3]{Eve Marder}
+\author[2]{Terrence Sejnowski}
+\author[3]{Timothy O'Leary}
+
+\affil[1]{Stanford University}
+\affil[2]{Salk Institute}
+\affil[3]{Brandeis University}
+
+\keywords{Synaptic tagging hypothesis, LTP, Transport, Morphology}
+
+
+
+\begin{abstract}
+Long lived changes in synaptic strength underlie persistent memories and in many cases require activity dependent transcription of plasticity-related genes.
+A well-known problem is to understand how appropriate gene products, such as synaptic proteins and mRNAs, get trafficked to the synapses that require them in spite of the complex dendritic arbors and thousands of postsynaptic sites typical of many kinds of neuron.
+Using a simple, biophysically-rooted model of microtubule transport we show that rapid delivery of plasticity-related cargo entails loss of specificity in the synapses that eventually receive it.
+The model predicts that neurons must balance the biochemical parameters that control trafficking to find a compromise between the precision and speed with which long-lived connectivity patterns are formed.
+Conversely, imbalances in transport parameters could lead to hypo-, or hyperconnectivity as well as loss of precision in associative memory, identifying a potential role for transport machinery in brain disorders that exhibit connectivity and plasticity phenotypes.
+\end{abstract}
+
+\begin{document}
+
+\flushbottom
+\maketitle
+\thispagestyle{empty}
+
+\section*{Introduction}
+
+Neurons often have complex dendritic trees, reflecting the dense and structured synaptic connectivity that supports nervous system function. In order to maintain appropriate connectivity, or to alter it as a means of encoding memories, numerous enzymes and macromolecules need to be transported along dendrites to the synapses that need them. How is this logistical problem solved at the subcellular level? And how might a biologically plausible solution constrain the behavior of synaptic plasticity `rules' and learning in general?
+
+Transport along dendrites is mediated by motor proteins (kinesins and dyneins) that walk along microtubules, carrying cargo at a rate that far exceeds passive diffusion [REFS]. The mechanisms that detach and sequester cargo at specific places in dendrites are not fully understood, but are known to depend on local biochemical signals that can be influenced by synaptic activity, such as transient elevations in cyclic AMP or $[Ca^{2+}]$ [REFS]. It is therefore conceivable that synaptic cargo is transported along dendrites in a relatively non-specific way, and synapses that need the cargo at any particular time trigger its release from the motor protein complexes as they pass. This idea is a variant of the well-known synaptic tagging hypothesis \citep{Frey_1997}, which proposes that synapses produce a biochemical `tag' that signals a requirement for synaptic building blocks as part of the plasticity process.
+
+Not all aspects of synaptic plasticity require delivery of cargo from the soma. For example, some forms of long-term potentiation (LTP) depend on local protein synthesis and can function in isolated dendrites [REFS]. However, in the long run, the mRNAs and the machinery that supports such plasticity needs to be replenished. Moreover, many long-lasting forms of synaptic plasticity rely on anterograde transport of mRNAs \citep{Kandel_2001,Puthanveettil_2008} and specific mRNAs are known to be selectively transported to regions of heightened synaptic activity \citep{Steward_1998,Steward_2001,Moga_2004} or to developing synaptic contacts \citep{Lyles_2006}. The interplay between global distribution and local plasticity mechanisms therefore demands attention.
+
+From simple assumptions about the dynamics of active dendritic transport we develop a model that can account for activity-dependent accumulation of molecular cargo at synaptic sites in realistic neuronal morphologies. In spite of its simplicity, the model is able to develop arbitrarily complex distributions in the concentration of molecular cargo across a dendritic tree. The simplicity of the model allows us to analyze its behavior and show how the relative strength of signals that lead to sequestration and the parameters that determine transport rate can affect the specificity of synaptic plasticity. [MORE DETAILS, rapid sequestration leads to... bottlenecks get caused by....]
+
+
+\section*{Results}
+
+\subsection*{Model description}
+
+Transport along microtubules is mediated by kinesin and dynein motors, which mediate anterograde and retrograde transport, respectively \citep{Hirokawa_2010,Gagnon_2011}. Cargo is often simultaneously bound to both forms of motor, resulting in stochastic back-and-forth movements with a net direction determined by the balance of opposing movements \citep{Hancock_2014,Buxbaum_2014b} (Fig. 1A). The biophysical mechanisms of intracellular transport is a diverse and active area of research (CITE).
+
+To obtain a general model that can accommodate variations in the biophysical details, we model microtubule-based transport as a biased random walk along a one-dimensional cable \citep{Bressloff_2006}. For each time step, the cargo moves left, right, or remains the in the same place. In the simplest model, the probabilities associated with each movement are fixed and independent across each time step (Fig. 1B, top panel). This model can capture the movements of molecular motors that make short movements before changing directions. However, other motors exhibit sustained movements (CITE). This can be captured by incorporating \textit{hysteresis} or history-dependence into the model. In this case, we assume the cargo is more likely to continue in the same direction as the previous time step (Fig. 1B, bottom panel).
+
+While the position of individual cargoes can be highly stochastic, the net movement of a population along a neurite is predictable (Fig. 1C). Figure 1D shows the distribution of 1000 molecules over time with (top panel) and without (bottom panel) history-dependence. The average behavior of both of these models can be fit by a mass-action model (Fig. 1E-F).
+
+The rate of molecular transport is locally modulated by calcium, ADP, and other biochemical signals \citep{Wang_2009,Mironov_2007}, and globally modulated by transcriptional control of motor protein expression \citep{Puthanveettil_2008}. This provides a potential mechanism for controlling the distribution of cargo over a dendritic tree using local activity signals.
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=1\columnwidth]{00_stochastic.png}
+\caption{A simple mass-action model of dendritic transport}
+\end{center}
+\end{figure}
+
+\subsection*{Local control over microtubular transport can achieve almost any expression pattern}
+
+As a first step, we model the transport of cargo along the microtubular network; we later extend this model to incorporate production, degradation, and detachment from the microtubules. The following mass-action scheme models transport in a unbranched neurite with $N$ compartments:
+$$
+u_1 \underset{b_1}{\overset{a_1}{\rightleftharpoons}} u_2 \underset{b_2}{\overset{a_2}{\rightleftharpoons}} u_3 \underset{b_3}{\overset{a_3}{\rightleftharpoons}}~...~\underset{b_{N-1}}{\overset{a_{N-1}}{\rightleftharpoons}}  u_N
+$$
+where $u_i$ is the mass of cargo in each compartment, and $a_i$ and $b_i$ respectively denote local rate constants for anterograde and retrograde transport. If the compartments have equal volumes, then $u_i$ can equivalently be thought of as the molecule's concentration. Similar mass-action schemes can be constructed to model transport in branched morphologies (Fig. 1A).
+
+This model makes the following assumptions. First, the movement of molecules between neighboring compartments is a stochastic and memoryless process. This assumption is reasonable if the run length of molecular motors is comparable to the size of the compartments; this appears to be the case under many \citep{Muller_2008,Verbrugge_2009}, but not necessarily all \citep{Dynes_2007} circumstances (see Discussion). Second, there are many copies of $u$ in each compartment. This allows us to approximate the mass as a continuous variable, and the dynamics of the system as deterministic. Third, the number of molecular motors and capacity of the microtubules is not saturated by the level of $u$ in any compartment. This means that the rate of transport from compartment A to compartment B linearly increases with the amount of $u$ in compartment A.
+
+In this model, the exchange of $u$ between neighboring compartments approaches an equilibrium/steady-state ($ss$) distribution over time. This occurs precisely when:
+$$
+\frac{u_i}{u_{i+1}} \Bigg|_{ss} = \frac{b_i}{a_i}
+$$
+(see Methods). This result allows us to tune the local trafficking rates, $a_i$ and $b_i$, to produce a desired spatial distribution of molecular cargo. Let $\tilde{u}$ denote the desired steady-state level of $u$ in each compartment, we should select trafficking rate constants that satisfy:
+$$
+\frac{b_i}{a_i} = \frac{\tilde{u}_i}{\tilde{u}_{i+1}}
+$$
+
+For example, we can create an linear gradient by specifying $\tilde{u}_i \propto i$. This results in $b_i / a_i =  i / i+1$. Figure 1B shows simulation data confirming that this model converges to a linear gradient at steady-state. Notice that the slope of the resulting linear gradient depends on the total amount of $u$ present in the cable; the transport rule only re-distributes $u$ so that its steady-state levels are \textit{proportional} to the desired levels (Fig. 1C). If the target distribution is normalized such that $\sum_i \tilde{u}_i = 1$, then the steady-state level in each compartment is given by:
+$$
+u_i \Big|_{ss} = \tilde{u}_i~ u_{\text{total}}
+$$
+where $u_{\text{total}} = \sum_i u_i$ is the total amount of $u$ in the neuron. The above results extend directly to branched morphologies (see Methods). For any pair of connected compartments:
+$$
+\frac{u_p}{u_c} \Bigg|_{ss} = \frac{b}{a}
+$$
+where $u_p$ is the level in the ``parent" compartment (closer to soma) and $u_c$ is the level in the ``child" compartment (closer to periphery); $b$ and $a$ refer to the trafficking rate constants between this pair of compartments.
+
+The above rules could be locally implemented by simple biochemical reaction networks. Consider the cytoplasmic calcium concentration, $[ca]_i$, as a candidate second messenger. Increases in $[ca]_i$ simultaneously arrest anterograde and retrograde microtubular transport \citep{Wang_2009}. That is, for any pair of compartments, the anterograde rate constant is determined by calcium in the parent compartment, $a = f([ca]_p)$,  and the retrograde rate constant is determined by calcium in the child compartment, $b = f([ca]_c)$, where $f$ is a function that describes how calcium alters the transport rates. This satisfies equation (4) and results in $\tilde{u}_i = 1/f([ca]_i)$:
+$$
+\frac{b}{a} = \frac{f([ca]_c)}{f([ca]_p)} = \frac{\tilde{u}_p}{\tilde{u}_c}
+$$
+
+To test the plausibility of this simple model in a complex morphology, we used an existing reconstruction of a CA1 pyramidal neuron \citep{Migliore_2012} that includes complex voltage-dependent conductances and synapses. Excitatory synaptic input was delivered to 120 locations within three dendritic regions (red dots, Fig. 1D), and the average membrane potential in each electrical compartment determined the target level $\tilde{u}_i$ in each compartment (Methods). This models how molecular cargo could be selectively trafficked to active synaptic sites. Figures 1E and 1F confirm that the spatial distribution of $u$ approaches the desired steady-state.
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=1\columnwidth]{01_mass_action.png}
+\caption{Delivery of cargo to active synapses in a complex dendritic tree}
+\end{center}
+\end{figure}
+
+\subsection*{Convergence rate}
+
+Biochemical processes are time-sensitive. For example, newly synthesized proteins must be delivered to synapses within \textasciitilde1 hour to support long-term potentiation in CA1 pyramidal cells \citep{Frey_1997,Frey_1998}. Thus, it is of substantial interest to examine factors that influence the speed of transport in the model. We studied the convergence rate of mass-action models (see Fig. 1); the stochastic model in figure 2 is related to this model by a simple rescaling (see Methods), so this analysis is applicable to both cases.
+
+In equation (5), we implicitly required $\tilde{u}_i > 0$ for all $i$ in order to avoid division by zero. Intuitively, if $\tilde{u}_i = 0$ for some compartment, then the more peripheral compartments become disconnected and inaccessible to the rest of the cell. Similarly, if certain $\tilde{u}_i$ are nearly equal to zero, then transport through these compartments will act as a bottleneck for transport, and convergence to the desired distribution will be slow.
+
+Figure 3 illustrates and analyzes this intuition in a simple three compartment model. The two compartments on the end of the cable have the same desired level, $\tilde{u}_1 = \tilde{u}_3$; the middle compartment acts as a bottleneck when $\tilde{u}_2$ is very small (Fig. 3A). This results in the mass-action model:
+$$
+u_1 \underset{x}{\overset{\epsilon}{\rightleftharpoons}} u_2 \underset{\epsilon}{\overset{x}{\rightleftharpoons}} u_3
+$$
+We assume that $u$ begins at one end of the cable, and examine the how taking $\epsilon$ to zero affects the convergence rate. Figure 2B shows that the convergence rate slows dramatically as $\epsilon$ decreases. This can be can be analyzed using basic linear systems theory; the convergence rate is given by the non-zero eigenvalue with smallest magnitude, which can be thought of as a rate-limiting step or process for the system (Methods, Supp. Fig. 1). Simulations confirmed this analysis and showed that the convergence rate diverges to infinity as $\epsilon$ approaches zero (Fig. 2C).
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=1\columnwidth]{03_convergence.png}
+\caption{Bottlenecks in transport}
+\end{center}
+\end{figure}
+
+Similar results were obtained in the multi-compartment CA1 neuron model. The model converged to a uniform target distribution more quickly than to a ``bottleneck" target distribution, in which the middle third of the apical dendrite had low steady-state levels of cargo (Fig. 3D). Each pair of anterograde and retrograde rate constants were normalized to sum to one; thus, differences in convergence were not due to the scale of the trafficking rate constants.
+
+In addition to this global view of convergence (Fig. 3D), we considered how the transport bottleneck affected transport to individual dendritic compartments. Consider a scenario where transported cargo produces a local chemical reaction after a critical concentration threshold is reached; for example, a recently potentiated synapse might be stabilized after enough plasticity-related factors are delivered from the soma. Figure 3E plots the transport delay, or duration of time it took for $u_i$ to reach a pre-defined threshold for each compartment. We observed qualitatively similar results for different threshold values (data not shown).
+
+As expected, introducing a bottleneck caused much longer delays to compartments distal to that bottleneck (Fig. 3E, upper right portion of plot). Interestingly, the presence of a bottleneck actually \textit{shortened} the transport delay to proximal compartments, compared to the uniform target distribution (Fig. 3E, lower left portion of plot). This occurs because molecules that were delayed from entering the distal compartments spread throughout the proximal compartments, reaching higher levels earlier in the simulation.
+
+One non-obvious prediction of this analysis is that transport to distal compartments should be quickened by allowing higher levels of $u$ into the proximal compartments at steady-state (Fig. 3E). This might be tested experimentally by characterizing the convergence time of a retrogradely transported molecule that aggregates at recently activated synapses, such as \textit{Arc} mRNA (\cite{Steward_1998}, see discussion). To illustrate this in the model CA1 cell, we characterized the time course of transport to the distal apical dendrite (stimulating stratum lacunosum/moleculare), proximal apical dendrite (stimulating stratum radiatum), entire apical dendrite (stimulating both layers), and entire cell (seizure). Interestingly, the model converged more slowly to distal input alone, than to paired distal and proximal input, or to an entirely uniform distribution (Fig. 3F).
+
+\subsection*{Microtubular trafficking, detachment and degradation on separated time scales}
+
+The models above present a simple hypothesis for controlling molecular transport along an intricate system of microtubules. While certain types of molecular cargo stay on the microtubule network (e.g. mitocondria), others detach from the microtubules after a reaching a desired location. For example, dendritic mRNAs are transported within densely-packed granules, and can be locally released following granule disassembly \citep{Krichevsky_2001,Buxbaum_2014a}. We model the detachment from the microtubule network as an irreversible process, and include a compartment-specific degradation reaction. This results in the following mass-action model:
+$$
+\begin{array}{cccccccc}
+u_1 & \overset{a_1}{\underset{b_1}{\rightleftharpoons}} &
+u_2 & \overset{a_2}{\underset{b_2}{\rightleftharpoons}} &
+u_3 & \overset{a_3}{\underset{b_3}{\rightleftharpoons}} &
+u_4 & \overset{a_4}{\underset{b_4}{\rightleftharpoons}} ...
+\\
+c_1 \Bigg\downarrow \phantom{c_1} & &
+c_2 \Bigg\downarrow \phantom{c_2} & &
+c_3 \Bigg\downarrow \phantom{c_3} & &
+c_4 \Bigg\downarrow \phantom{c_4} & 
+\\
+u_1^\star &  &
+u_2^\star &  &
+u_3^\star &  &
+u_4^\star &   ...
+\\
+d_1 \Bigg\downarrow \phantom{d_1} & &
+d_2 \Bigg\downarrow \phantom{d_2} & &
+d_3 \Bigg\downarrow \phantom{d_3} & &
+d_4 \Bigg\downarrow \phantom{d_4} & 
+\\
+\varnothing &  &
+\varnothing &  &
+\varnothing &  &
+\varnothing &  
+\end{array}
+$$
+As before, a molecule $u$ is transported along a network of microtubules (top row, in equation 6). In each compartment, molecules can irreversibly detach from the microtubules in a reaction $u_i \xrightarrow{c_i} u_i^\star$, where $u^\star$ denotes the biochemically active form of $u$, which is assumed to be inactive during transport. The final reaction, $u_i^\star \xrightarrow{d_i} \varnothing$, models degradation in each compartment. Note that only $u^\star$ is subject to degradation; the molecule is assumed to be protected from degradation during transport. This model can be extended to branched morphologies (Fig. 3A).
+
+One way to analyze this system is to assume that these three processes --- trafficking, detachment, and degradation --- occur on separate timescales. If trafficking is sufficiently faster than detachment ($a,b \gg c$), then $u$ approaches a quasi-steady state distribution defined by our previous analysis (equation 5). We then choose detachment rate constants that transform the microtubular distribution into our desired distribution for $u^\star$:
+$$
+c_i \propto \frac{\tilde{u}^\star_i}{\tilde{u}_i}
+$$
+Here, $\tilde{u}$ and $\tilde{u}^\star$ respectively denote the quasi-steady state distributions for $u$ and $u^\star$, respectively. Due to the degradation reaction, the system no longer approaches a steady-state; however, as long as degradation is sufficiently slow ($c \gg d$) the desired distribution is transiently achieved.
+
+This model admits multiple strategies for controlling the distribution of molecular cargo (Fig. 4B). One strategy (Fig. 4C) is to choose microtubular trafficking rates such that $\tilde{u}$ exactly matches $\tilde{u}^\star$; detachment from the microtubules is unbiased ($c_i =$ constant). Figure 3C shows that the desired spatial distribution is achieved both along the microtubules (red line) and for the detached/activated cargo (blue line).
+
+A second strategy (Fig. 4D) begins by uniformly distributing cargo along the microtubules, and locally detaches cargo at a rate proportional to the desired level ($c_i \propto \tilde{u}^\star_i$). Unlike the first solution, this strategy avoids the transport bottlenecks examined in Figure 3, and can achieve target patterns with  $\tilde{u}^\star$ equal to zero in certain compartments by setting $c_i = 0$.
+
+We can also interpolate between these two strategies to achieve the target distribution. Let $F$ be a scalar between 0 and 1, and let $\tilde{u}^\star$ be normalized to sum to one. We choose $a_i$ and $b_i$ to achieve:
+$$
+\tilde{u}_i = F~\tilde{u}_i^\star + (1-F)/N 
+$$
+along the microtubular network and choose $c_i$ to satisfy
+$$
+c_i \propto \frac{\tilde{u}_i^\star}{F~\tilde{u}_i^\star + (1-F)/N} 
+$$
+Here, $N$ is the number of compartments in the model. Setting $F=1$ results in the simulation in figure 4C, while setting $F=0$ results in the simulation in figure 4D. Setting $F=0.3$ results in the simulation shown in figure 4E, which uses an interpolated strategy. Thus, effective trafficking systems can be achieved by a spectrum of strategies, which may be suited to different situations and purposes (see Discussion).
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=1\columnwidth]{Fig3.png}
+\caption{Multiple strategies for transport in a model including nonuniform microtubular detachment/activation}
+\end{center}
+\end{figure}
+
+\subsection*{Non-local interactions can occur when time scales aren't separated}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=0.7\columnwidth]{05_heterosynaptic.png}
+\caption{Heterosynaptic and non-local interactions.
+}
+\end{center}
+\end{figure}
+
+\subsection*{Tradeoff between speed of consolidation and specificity of potentiation}
+
+We sought to understand the general relationship
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=0.5\columnwidth]{tradeoff.png}
+\caption{Tradeoff between speed of consolidation and specificity of potentiation.
+}
+\end{center}
+\end{figure}
+
+\section*{Discussion}
+
+A microscope image of a typical neuronal dendritic tree hints at the complex logistical task that the neuron must solve to maintain synapses and alter them, as appropriate, during development and learning. Synapses, such as the extensively-studied excitatory synapses of the mammalian nervous system, comprise hundreds of different proteins, including receptors, structural and anchoring proteins, and cytosolic signalling enzymes [REFs]. How do these components find their way to the synapse, and how do synapses that have varying demands for these components receive an appropriate supply?
+
+Local protein synthesis near synaptic sites offers an elegant solution to this problem. Many mRNAs for synaptic proteins are distributed in dendrites, along with ribosomes and translational regulation machinery that can provide new proteins as they are needed [REFs]. However, these components need to be appropriately distributed to begin with and on a long timescale their distribution needs to be maintained. On the other hand, some forms of long-term synaptic plasticity have a transcription-dependent component, suggesting that somatic biosynthesis and dendritic trafficking are important for maintaining and controlling synaptic connectivity in addition to local mechanisms.
+
+We examined simple models of microtubular transport to investigate how such a global network can be organized and controlled in complex neuronal morphologies. Previous models of microtubular-based transport have examined systems with spatially uniform rates of anterograde and retrograde transport \citep{Smith_2001,Bressloff_2006}. We hypothesized that complex spatial patterns could emerge by relaxing this assumption. One might na\"ively expect that elaborately branched morphologies obfuscate the relationship between these local mechanisms and the global distribution of molecular cargo. We showed that the relationship is actually quite simple: the steady-state ratio between neighboring compartments is the reciprocal ratio of the trafficking rate constants connecting those compartments.
+
+Local activity signals provide a means to sequester dendritic cargo as it passes a synapse, providing a way for plasticity-inducing synaptic stimulation to `tag' a synapse. Direct evidence of activity-dependent arrest [REF Elife] and accumulation \citep{Krichevsky_2001,Buxbaum_2014a} of mRNAs and other actively transported biomolecules suggests that the kind of mechanism we studied here is involved in regulating synapses in parallel with local synthesis mechanisms. We are agnostic about the precise identity of the activity signal that controls transport and sequestration, but note that experiments have shown that local calcium \citep{Wang_2009} and ADP \citep{Mironov_2007}, alter anterograde and retrograde transport rates. Similarly, experimental data indicate that degradation of mRNA can be spatially heterogeneous and activity-dependent \citep{Farris_2014}. Incorporating these additional processes into the model created new possibilities for molecular trafficking; the same expression pattern can be achieved by nonuniform microtubular transport followed by uniform release or from uniform transport followed by nonuniform release (Fig. 4).
+
+There is experimental evidence for both strategies. \cite{Kim_2015} identified three mRNAs that were uniformly distributed throughout cultured \textit{Aplysia} sensory neurons, but were targeted to synapses at the level of protein expression by localized translation. In contrast, the nonuniform expression of \textit{Arc} mRNA is closely matched to the pattern of Arc protein \citep{Farris_2014, Steward_2015}. 
+
+Each of these transport strategies might be tailored for different constraints or purposes. For example, a uniform mRNA profile could facilitate shifts in the protein expression pattern, since the changing the pattern of local translation is presumably faster than re-distributing the mRNA. In other cases, it might be undesirable to rapidly shift protein expression based on transient changes to the neuron or circuit; controlling expression at the level of mRNA might prevent this. We showed that it is possible to interpolate between these two strategies (Fig. 4E), which might allow neurons to trade off between the relative advantages of each.
+
+FRX - in this disease there is aberrantly high translation of mRNAs. This is like a high sequestration rate. Leads to higher connectivity but perhaps lower specificity.
+
+\section*{Acknowledgements}
+
+\bibliography{transport_refs}
+
+\end{document}
