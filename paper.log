@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  17 AUG 2015 16:24
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  17 AUG 2015 16:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -786,37 +786,31 @@ File: 00_stochastic.png Graphic file (type png)
 Package pdftex.def Info: 00_stochastic.png used on input line 57.
 (pdftex.def)             Requested size: 415.12572pt x 256.20444pt.
 
-[2 <./00_stochastic.png>] [3]
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[2] [3 <./00_stochastic.png>]
 <01_mass_action.png, id=25, 704.27115pt x 315.45856pt>
 File: 01_mass_action.png Graphic file (type png)
 
 <use 01_mass_action.png>
 Package pdftex.def Info: 01_mass_action.png used on input line 100.
 (pdftex.def)             Requested size: 415.12572pt x 185.94565pt.
-
-<03_convergence.png, id=26, 576.57005pt x 389.10168pt>
+ [4 <./01_mass_action.png>]
+<03_convergence.png, id=31, 576.57005pt x 389.10168pt>
 File: 03_convergence.png Graphic file (type png)
 
 <use 03_convergence.png>
 Package pdftex.def Info: 03_convergence.png used on input line 119.
 (pdftex.def)             Requested size: 415.12572pt x 280.153pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[4 <./01_mass_action.png>]
-Underfull \vbox (badness 1668) has occurred while \output is active []
-
- [5 <./03_convergence.png>] <Fig3.png, id=36, 551.85371pt x 307.00296pt>
+ [5 <./03_convergence.png>] [6]
+<Fig3.png, id=40, 551.85371pt x 307.00296pt>
 File: Fig3.png Graphic file (type png)
  <use Fig3.png>
 Package pdftex.def Info: Fig3.png used on input line 187.
 (pdftex.def)             Requested size: 415.12572pt x 230.94026pt.
 
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<05_heterosynaptic.png, id=37, 531.99754pt x 495.95288pt>
+<05_heterosynaptic.png, id=41, 531.99754pt x 495.95288pt>
 File: 05_heterosynaptic.png Graphic file (type png)
 
 <use 05_heterosynaptic.png>
@@ -826,20 +820,17 @@ Package pdftex.def Info: 05_heterosynaptic.png used on input line 196.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<tradeoff.png, id=38, 402.50375pt x 272.01625pt>
+<tradeoff.png, id=42, 402.50375pt x 272.01625pt>
 File: tradeoff.png Graphic file (type png)
  <use tradeoff.png>
 Package pdftex.def Info: tradeoff.png used on input line 208.
 (pdftex.def)             Requested size: 207.56285pt x 140.27048pt.
- [6]
+
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[7 <./Fig3.png> <./05_heterosynaptic.png>] [8 <./tradeoff.png>] (./paper.bbl
-Underfull \vbox (badness 1033) has occurred while \output is active []
-
- [9])
-
+[7 <./Fig3.png>] [8 <./05_heterosynaptic.png> <./tradeoff.png>] (./paper.bbl
+[9]) 
 AED: lastpage setting LastPage
 [10] (./paper.aux)
 
@@ -849,11 +840,11 @@ LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 Here is how much of TeX's memory you used:
  8590 strings out of 493089
  124713 string characters out of 6134842
- 344414 words of memory out of 5000000
+ 343497 words of memory out of 5000000
  11673 multiletter control sequences out of 15000+600000
  56009 words of font info for 234 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 43i,12n,45p,1185b,409s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 43i,12n,45p,1191b,405s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/te
 xlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/tex
@@ -867,7 +858,7 @@ ve/2015/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2015
 /fonts/type1/urw/symbol/usyr.pfb></usr/local/texlive/2015/texmf-dist/fonts/type
 1/urw/times/utmr8a.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/urw/time
 s/utmri8a.pfb>
-Output written on paper.pdf (10 pages, 3698427 bytes).
+Output written on paper.pdf (10 pages, 3698756 bytes).
 PDF statistics:
  99 PDF objects out of 1000 (max. 8388607)
  62 compressed objects within 1 object stream
