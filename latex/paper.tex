@@ -147,7 +147,7 @@ c_4 \Bigg\downarrow \phantom{c_4} &
 u_1^\star &  &
 u_2^\star &  &
 u_3^\star &  &
-u_4^\star &   ...
+u_4^\star &   
 \\
 d_1 \Bigg\downarrow \phantom{d_1} & &
 d_2 \Bigg\downarrow \phantom{d_2} & &
@@ -168,19 +168,11 @@ c_i \propto \frac{\tilde{u}^\star_i}{\tilde{u}_i}
 $$
 Here, $\tilde{u}$ and $\tilde{u}^\star$ respectively denote the quasi-steady state distributions for $u$ and $u^\star$, respectively. Due to the degradation reaction, the system no longer approaches a steady-state; however, as long as degradation is sufficiently slow ($c \gg d$) the desired distribution is transiently achieved.
 
-This model admits multiple strategies for controlling the distribution of molecular cargo (Fig. 4B). One strategy (Fig. 4C) is to choose microtubular trafficking rates such that $\tilde{u}$ exactly matches $\tilde{u}^\star$; detachment from the microtubules is unbiased ($c_i =$ constant). Figure 3C shows that the desired spatial distribution is achieved both along the microtubules (red line) and for the detached/activated cargo (blue line).
+This model admits a spectrum of strategies for controlling the distribution of molecular cargo (Fig. 4B). One strategy (Fig. 4C) is to choose microtubular trafficking rates such that $\tilde{u}$ exactly matches $\tilde{u}^\star$; detachment from the microtubules is unbiased ($c_i =$ constant). Figure 3C shows that the desired spatial distribution is achieved both along the microtubules (red line) and for the detached/activated cargo (blue line).
 
-A second strategy (Fig. 4D) begins by uniformly distributing cargo along the microtubules, and locally detaches cargo at a rate proportional to the desired level ($c_i \propto \tilde{u}^\star_i$). Unlike the first solution, this strategy avoids the transport bottlenecks examined in Figure 3, and can achieve target patterns with  $\tilde{u}^\star$ equal to zero in certain compartments by setting $c_i = 0$.
+Figure 4D shows the strategy on the other end of the spectrum. It begins by uniformly distributing cargo along the microtubules, and locally detaches cargo at a rate proportional to the desired level ($c_i \propto \tilde{u}^\star_i$). Unlike the first solution, this strategy avoids the transport bottlenecks examined in Figure 3, and can achieve target patterns with  $\tilde{u}^\star$ equal to zero in certain compartments by setting $c_i = 0$. 
 
-We can also interpolate between these two strategies to achieve the target distribution. Let $F$ be a scalar between 0 and 1, and let $\tilde{u}^\star$ be normalized to sum to one. We choose $a_i$ and $b_i$ to achieve:
-$$
-\tilde{u}_i = F~\tilde{u}_i^\star + (1-F)/N 
-$$
-along the microtubular network and choose $c_i$ to satisfy
-$$
-c_i \propto \frac{\tilde{u}_i^\star}{F~\tilde{u}_i^\star + (1-F)/N} 
-$$
-Here, $N$ is the number of compartments in the model. Setting $F=1$ results in the simulation in figure 4C, while setting $F=0$ results in the simulation in figure 4D. Setting $F=0.3$ results in the simulation shown in figure 4E, which uses an interpolated strategy. Thus, effective trafficking systems can be achieved by a spectrum of strategies, which may be suited to different situations and purposes (see Discussion).
+Figure 4E shows the behavior of an intermediate model, whose parameters are a linearly interpolation between the extreme strategies shown in Figure 4C and 4D. Thus, effective trafficking systems can be achieved by a spectrum of strategies, which may be suited to different situations and purposes (see Discussion). 
 
 \begin{figure}[h!]
 \begin{center}
@@ -226,6 +218,21 @@ There is experimental evidence for both strategies. \cite{Kim_2015} identified t
 Each of these transport strategies might be tailored for different constraints or purposes. For example, a uniform mRNA profile could facilitate shifts in the protein expression pattern, since the changing the pattern of local translation is presumably faster than re-distributing the mRNA. In other cases, it might be undesirable to rapidly shift protein expression based on transient changes to the neuron or circuit; controlling expression at the level of mRNA might prevent this. We showed that it is possible to interpolate between these two strategies (Fig. 4E), which might allow neurons to trade off between the relative advantages of each.
 
 FRX - in this disease there is aberrantly high translation of mRNAs. This is like a high sequestration rate. Leads to higher connectivity but perhaps lower specificity.
+
+\section*{Methods}
+
+\subsection*{Spectrum of Trafficking Strategies}
+
+We can also interpolate between these two strategies to achieve the target distribution. Let $F$ be a scalar between 0 and 1, and let $\tilde{u}^\star$ be normalized to sum to one. We choose $a_i$ and $b_i$ to achieve:
+$$
+\tilde{u}_i = F~\tilde{u}_i^\star + (1-F)/N 
+$$
+along the microtubular network and choose $c_i$ to satisfy
+$$
+c_i \propto \frac{\tilde{u}_i^\star}{F~\tilde{u}_i^\star + (1-F)/N} 
+$$
+Here, $N$ is the number of compartments in the model. Setting $F=1$ results in the simulation in figure 4C, while setting $F=0$ results in the simulation in figure 4D. Setting $F=0.3$ results in the simulation shown in figure 4E, which uses an interpolated strategy.
+
 
 \section*{Acknowledgements}
 
