@@ -44,13 +44,11 @@ From simple assumptions about the dynamics of active dendritic transport we deve
 
 \subsection*{Model description}
 
-Transport along microtubules is mediated by kinesin and dynein motors, which mediate anterograde and retrograde transport, respectively \citep{Hirokawa_2010,Gagnon_2011}. Cargo is often simultaneously bound to both forms of motor, resulting in stochastic back-and-forth movements with a net direction determined by the balance of opposing movements \citep{Hancock_2014,Buxbaum_2014b} (Fig. 1A). The biophysical mechanisms of intracellular transport is a diverse and active area of research (CITE).
+Transport along microtubules is mediated by kinesin and dynein motors, which mediate anterograde and retrograde transport, respectively \citep{Hirokawa_2010,Gagnon_2011}. Cargo is often simultaneously bound to both forms of motor protein, resulting in stochastic back-and-forth movements with a net direction determined by the balance of opposing movements \citep{Hancock_2014,Buxbaum_2014b} (Fig. 1A). The biophysical mechanisms of intracellular transport is a diverse and active area of research (CITE).
 
-To obtain a general model that can accommodate variations in the biophysical details, we model microtubule-based transport as a biased random walk along a one-dimensional cable \citep{Bressloff_2006}. For each time step, the cargo moves left, right, or remains the in the same place. In the simplest model, the probabilities associated with each movement are fixed and independent across each time step (Fig. 1B, top panel). This model can capture the movements of molecular motors that make short movements before changing directions. However, other motors exhibit sustained movements (CITE). This can be captured by incorporating \textit{hysteresis} or history-dependence into the model. In this case, we assume the cargo is more likely to continue in the same direction as the previous time step (Fig. 1B, bottom panel).
+To obtain a general model that can accommodate variations in the biophysical details, we consider microtubule-based transport as a biased random walk along a one-dimensional cable \citep{Bressloff_2006}. For each time step, the cargo moves left, right, or remains the in the same place. In the simplest model, the probabilities associated with each movement are fixed and independent across each time step (Fig. 1B, top panel). This model can capture the movements of molecular motors that make short movements before changing directions. However, other motors exhibit sustained movements (CITE). This can be captured by incorporating \textit{hysteresis} or history-dependence into the model. In this case, we assume the cargo is more likely to continue in the same direction as the previous time step (Fig. 1B, bottom panel).
 
-While the position of individual cargoes can be highly stochastic, the net movement of a population along a neurite is predictable (Fig. 1C). Figure 1D shows the distribution of 1000 molecules over time with (top panel) and without (bottom panel) history-dependence. The average behavior of both of these models can be fit by a mass-action model (Fig. 1E-F).
-
-The rate of molecular transport is locally modulated by calcium, ADP, and other biochemical signals \citep{Wang_2009,Mironov_2007}, and globally modulated by transcriptional control of motor protein expression \citep{Puthanveettil_2008}. This provides a potential mechanism for controlling the distribution of cargo over a dendritic tree using local activity signals.
+While the position of individual cargoes can be highly stochastic, the net movement of a population of cargoes (Fig. 1C) is predictable. Figure 1D shows the distribution of 1000 molecules over time with (top panel) and without (bottom panel) history-dependence. In both cases, these simulations can be well-fit by a drift-diffusion partial differential equation, which is easier to analyze because it is deterministic and contains fewer variables (\cite{Smith_2001}; Fig. 1E-F).
 
 \begin{figure}[h!]
 \begin{center}
@@ -59,17 +57,17 @@ The rate of molecular transport is locally modulated by calcium, ADP, and other 
 \end{center}
 \end{figure}
 
-\subsection*{Local control over microtubular transport can achieve almost any expression pattern}
-
-As a first step, we model the transport of cargo along the microtubular network; we later extend this model to incorporate production, degradation, and detachment from the microtubules. The following mass-action scheme models transport in a unbranched neurite with $N$ compartments:
-$$
+The partial differential equation in Figure 1E can be approximated by discretizing a dendritic tree into small compartments, and considering the movement of cargo between neighboring compartments as a chemical reaction with first order kinetics. In an unbranched cable with $N$ compartments, the mass-action model is:
+\begin{equation}
 u_1 \underset{b_1}{\overset{a_1}{\rightleftharpoons}} u_2 \underset{b_2}{\overset{a_2}{\rightleftharpoons}} u_3 \underset{b_3}{\overset{a_3}{\rightleftharpoons}}~...~\underset{b_{N-1}}{\overset{a_{N-1}}{\rightleftharpoons}}  u_N
-$$
+\end{equation}
 where $u_i$ is the mass of cargo in each compartment, and $a_i$ and $b_i$ respectively denote local rate constants for anterograde and retrograde transport. If the compartments have equal volumes, then $u_i$ can equivalently be thought of as the molecule's concentration. Similar mass-action schemes can be constructed to model transport in branched morphologies (Fig. 1A).
 
-This model makes the following assumptions. First, the movement of molecules between neighboring compartments is a stochastic and memoryless process. This assumption is reasonable if the run length of molecular motors is comparable to the size of the compartments; this appears to be the case under many \citep{Muller_2008,Verbrugge_2009}, but not necessarily all \citep{Dynes_2007} circumstances (see Discussion). Second, there are many copies of $u$ in each compartment. This allows us to approximate the mass as a continuous variable, and the dynamics of the system as deterministic. Third, the number of molecular motors and capacity of the microtubules is not saturated by the level of $u$ in any compartment. This means that the rate of transport from compartment A to compartment B linearly increases with the amount of $u$ in compartment A.
+A critical assumption of this model is that the movement of molecules between neighboring compartments is a stochastic and memoryless process. This assumption is reasonable if the run length of molecular motors is comparable to the size of the compartments; this appears to be the case under many \citep{Muller_2008,Verbrugge_2009}, thought not necessarily all \citep{Dynes_2007} circumstances (see Discussion). In simulations, we observed that this model was not very sensitive to violations of this assumption; the population dynamics of cargoes with substantial run lengths could still be well-fit by this class of models (Fig. 1F, lower panel; Supp Fig. NUMBER). [SHOULD THIS BE MOVED TO DISCUSSION?]
 
-In this model, the exchange of $u$ between neighboring compartments approaches an equilibrium/steady-state ($ss$) distribution over time. This occurs precisely when:
+\subsection*{A simple rule achieves desired spatial distributions of cargo}
+
+The exchange of $u$ between neighboring compartments approaches an equilibrium/steady-state ($ss$) distribution over time. In an unbranched cable, this occurs precisely when:
 $$
 \frac{u_i}{u_{i+1}} \Bigg|_{ss} = \frac{b_i}{a_i}
 $$
@@ -93,7 +91,7 @@ $$
 \frac{b}{a} = \frac{f([ca]_c)}{f([ca]_p)} = \frac{\tilde{u}_p}{\tilde{u}_c}
 $$
 
-To test the plausibility of this simple model in a complex morphology, we used an existing reconstruction of a CA1 pyramidal neuron \citep{Migliore_2012} that includes complex voltage-dependent conductances and synapses. Excitatory synaptic input was delivered to 120 locations within three dendritic regions (red dots, Fig. 1D), and the average membrane potential in each electrical compartment determined the target level $\tilde{u}_i$ in each compartment (Methods). This models how molecular cargo could be selectively trafficked to active synaptic sites. Figures 1E and 1F confirm that the spatial distribution of $u$ approaches the desired steady-state.
+To test the plausibility of this simple model in a complex morphology, we used an existing reconstruction of a CA1 pyramidal neuron \citep{Migliore_2012} that includes complex voltage-dependent conductances and synapses. Excitatory synaptic input was delivered to 120 locations within three dendritic regions (red dots, Fig. 1D), and the average membrane potential in each electrical compartment determined the target level $\tilde{u}_i$ in each compartment (Methods). This models how molecular cargo could be selectively trafficked to active synaptic sites. Figures 2E and 2F confirm that the spatial distribution of $u$ approaches the desired steady-state.
 
 \begin{figure}[h!]
 \begin{center}
@@ -102,9 +100,11 @@ To test the plausibility of this simple model in a complex morphology, we used a
 \end{center}
 \end{figure}
 
+; the stochastic model in figure 2 is related to this model by a simple rescaling (see Methods), so this analysis is applicable to both cases
+
 \subsection*{Convergence rate}
 
-Biochemical processes are time-sensitive. For example, newly synthesized proteins must be delivered to synapses within \textasciitilde1 hour to support long-term potentiation in CA1 pyramidal cells \citep{Frey_1997,Frey_1998}. Thus, it is of substantial interest to examine factors that influence the speed of transport in the model. We studied the convergence rate of mass-action models (see Fig. 1); the stochastic model in figure 2 is related to this model by a simple rescaling (see Methods), so this analysis is applicable to both cases.
+Biochemical processes are time-sensitive. For example, newly synthesized proteins must be delivered to synapses within \textasciitilde1 hour to support long-term potentiation in CA1 pyramidal cells \citep{Frey_1997,Frey_1998}. Thus, it is of substantial interest to examine factors that influence the speed of transport in the model.
 
 In equation (5), we implicitly required $\tilde{u}_i > 0$ for all $i$ in order to avoid division by zero. Intuitively, if $\tilde{u}_i = 0$ for some compartment, then the more peripheral compartments become disconnected and inaccessible to the rest of the cell. Similarly, if certain $\tilde{u}_i$ are nearly equal to zero, then transport through these compartments will act as a bottleneck for transport, and convergence to the desired distribution will be slow.
 
@@ -219,9 +219,63 @@ Each of these transport strategies might be tailored for different constraints o
 
 FRX - in this disease there is aberrantly high translation of mRNAs. This is like a high sequestration rate. Leads to higher connectivity but perhaps lower specificity.
 
+Other assumptions of the mass-action model - Second, the model assumes are many copies of $u$ in each compartment. This allows us to approximate the mass as a continuous variable, and the dynamics of the system as deterministic. Third, the number of molecular motors and capacity of the microtubules is not saturated by the level of $u$ in any compartment. This means that the rate of transport from compartment A to compartment B linearly increases with the amount of $u$ in compartment A.
+
 \section*{Methods}
 
-\subsection*{Spectrum of Trafficking Strategies}
+\subsection*{Microtubule Transport Model (Fig. 1)}
+Transport in an unbranched cable (equation 1) leads to the following system of differential equations:
+$$
+\begin{array}{lcl}
+\dot{u}_1 & = & -a_1 u_1 + b_1 u_2 \\
+\dot{u}_2 & = & a_1 u_1 - (a_2+b_1) u_2 + b_2 u_3 \\
+~ & \vdots & ~ \\
+\dot{u}_i & = & a_{i-1} u_{i-1} - (a_i+b_{i-1}) u_i + b_i u_{i+1} \\
+~ & \vdots & ~ \\
+\dot{u}_N & = & a_{N-1} u_{N-1} - b_{N-1} u_N 
+\end{array}
+$$
+Similar systems result from branched mass-action models. The steady-state relationship in equation 5 can be immediately verified at either end of the cable:
+$$
+\dot{u}_1 = 0 ~\Rightarrow~ -a_{1} u_{1} + b_{1} u_2 = 0 ~\Rightarrow~ \frac{u_1}{u_2} \Bigg |_{ss} = \frac{b_1}{a_1}
+$$
+The same procedure can be iteratively applied down the cable to show that equation 5 holds globally. The same result can be shown in a branched tree morphology. Here, each compartment has exactly one parent, but can have multiple children at branch points. Consider a parent-child pair of compartments, $u_p$ and $u_c$, with anterograde/retrograde transport rate constants $a$ and $b$. At steady-state, there is no net flux between $u_c$ and its children:
+$$
+\dot{u}_c = a u_p - b u_c + \underbrace{\sum_j (b_j u_j - a_j u_c)}_{= 0 \text{ , at ss}}
+$$
+Thus, we have:
+$$
+\dot{u}_c = a u_p - b u_c = 0 ~\Rightarrow~ \frac{u_p}{u_c} \Bigg |_{ss} = \frac{b}{a}
+$$
+To study how the system converges to steady-state, we can re-express the model as a matrix differential equation, $\mathbf{\dot{u}} = A \mathbf{u}$, where $\mathbf{u} = \left[ u_1, u_2, ... u_N \right]^T$ is the state vector, and $A$ is a matrix. For a general branched morphology, the matrix $A$ will be nearly tridiagonal, with off-diagonal elements corresponding to branch points; matrices in this form are called Hines matrices \citep{Hines_1984}. For the simpler case of an unbranched cable, $A$ is tridiagonal:
+$$
+A = 
+ \begin{bmatrix}
+  ~-a_1~  & b_1      & 0         &         & ...              & 0        \\
+   a_1    & -b_1-a_2 & b_2       &  0      &                  &          \\
+   0      &  a_2     & -b_2-a_3  & ~~~ b_3~~~  & \ddots     & \vdots   \\
+   \vdots &  0       & a_3       & \ddots  &                  & 0        \\
+          &          & \ddots    &         & -b_{N-2}-a_{N-1} & b_{N-1}  \\
+   0      &          & ...       &  0      & a_{N-1}          & ~-b_{N-1}~
+ \end{bmatrix}
+$$
+For both branched and unbranched morphologies, each column of $A$ sums to zero, which reflects conservation of mass within the system. The rank of $A$ is exactly $N-1$ (this can be seen by taking the sum of the first $N-1$ rows, which results in $-1$ times the final row). Thus, the nullspace of $A$ is one-dimensional (red lines in Supp. Fig. 1).
+
+The desired distribution, $\mathbf{\tilde{u}}$, is an eigenvector that spans the nullspace of $A$. All other eigenvalues $A$ are negative, which can be shown using the Gershgorin circle theorem. The convergence rate is determined by the non-zero eigenvalue with smallest magnitude of $A$. We can increase the convergence rate (while still maintaining $\mathbf{\tilde{u}}$) by multiplying all rate constants by some common value. However, this trivial strategy ignores the fact that there are biophysical limits on how fast molecular motors can move.
+
+\subsection*{Stochastic Model of Transport}
+
+We model the stochastic transport of a single molecule with a discrete-time Markov chain model. Let the vector $\mathbf{p}^{(k)} = [p_1^{(k)}, p_2^{(k)}, ..., p_N^{(k)}]^T$ denote the probability of finding the molecule in each of the $N$ compartments on the $k$th time step. For example, $p_1^{(0)}$ is the initial probability that the molecule is in the first compartment (which is the soma in our implementation). The state-transition matrix $S$ describes the probabilistic anterograde/retrograde transport of the molecule between neighboring compartments in each discrete time step:
+$$
+\mathbf{p}^{(k+1)} = S\mathbf{p}^{(k)}
+$$
+The state-transition matrix is related to the mass-action system matrix $A$ by the following relation:
+$$
+S = \Delta t A + I
+$$
+where $\Delta t$ is the length of a time step (assumed to be very small), and $I$ is the identity matrix. The columns of $S$ sum to one, and, since $\Delta t$ is small, all elements of $S$ lie on the interval $[0,1]$. This transformation shifts and scales the eigenvalues of $A$ to lie on the interval $(0,1]$, without modifying the eigenvectors of the system. The steady-state probability distribution is given by the eigenvector of $S$ with eigenvalue 1 (CITE), which is identical to the vector spanning the nullspace of $A$ and therefore the steady-state concentration distribution of the mass-action model.
+
+\subsection{Transport Model With Detachment and Degradation (Fig. 4)}
 
 We can also interpolate between these two strategies to achieve the target distribution. Let $F$ be a scalar between 0 and 1, and let $\tilde{u}^\star$ be normalized to sum to one. We choose $a_i$ and $b_i$ to achieve:
 $$
