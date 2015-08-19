@@ -6,3 +6,5 @@ To Do:
 * Revisit the best way to normalize detachment rate constants in Fig. 6
 
 * Methods
+
+* Postman/woman schematic in Fig 1?
