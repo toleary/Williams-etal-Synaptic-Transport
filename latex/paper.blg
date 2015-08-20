@@ -3,44 +3,44 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: paper.aux
 The style file: apalike.bst
 Database file #1: transport_refs.bib
-You've used 29 entries,
+You've used 30 entries,
             1935 wiz_defined-function locations,
-            692 strings with 9254 characters,
-and the built_in function-call counts, 11767 in all, are:
-= -- 1168
-> -- 467
-< -- 18
-+ -- 157
-- -- 154
-* -- 1079
-:= -- 2049
-add.period$ -- 87
-call.type$ -- 29
-change.case$ -- 222
-chr.to.int$ -- 28
-cite$ -- 29
-duplicate$ -- 402
-empty$ -- 829
-format.name$ -- 209
-if$ -- 2264
+            699 strings with 9416 characters,
+and the built_in function-call counts, 12189 in all, are:
+= -- 1212
+> -- 480
+< -- 19
++ -- 161
+- -- 158
+* -- 1118
+:= -- 2119
+add.period$ -- 90
+call.type$ -- 30
+change.case$ -- 229
+chr.to.int$ -- 29
+cite$ -- 30
+duplicate$ -- 416
+empty$ -- 861
+format.name$ -- 216
+if$ -- 2347
 int.to.chr$ -- 2
 int.to.str$ -- 0
-missing$ -- 29
-newline$ -- 148
-num.names$ -- 87
-pop$ -- 146
+missing$ -- 30
+newline$ -- 153
+num.names$ -- 90
+pop$ -- 150
 preamble$ -- 1
-purify$ -- 222
+purify$ -- 229
 quote$ -- 0
-skip$ -- 312
+skip$ -- 323
 stack$ -- 0
-substring$ -- 945
-swap$ -- 29
+substring$ -- 988
+swap$ -- 30
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 174
+type$ -- 180
 warning$ -- 0
-while$ -- 102
+while$ -- 106
 width$ -- 0
-write$ -- 379
+write$ -- 392

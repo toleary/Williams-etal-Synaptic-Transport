@@ -149,9 +149,11 @@ In addition to this global view of convergence (Fig. 3D), we considered how the 
 Consider a scenario where transported cargo produces a local chemical reaction after a critical concentration threshold is reached; for example, a recently potentiated synapse might be stabilized after enough plasticity-related factors are delivered from the soma.
 Figure 3E plots the transport delay, or duration of time it took for $u_i$ to reach a pre-defined threshold for each compartment. We observed qualitatively similar results for different threshold values (data not shown).
 
-As expected, introducing a bottleneck caused much longer delays to compartments distal to that bottleneck (Fig. 3E, upper right portion of plot). Interestingly, the presence of a bottleneck actually \textit{shortened} the transport delay to proximal compartments, compared to the uniform target distribution (Fig. 3E, lower left portion of plot). This occurs because molecules that were delayed from entering the distal compartments spread throughout the proximal compartments, reaching higher levels earlier in the simulation.
+As expected, introducing a bottleneck caused much longer delays to compartments distal to that bottleneck (Fig. 3E, upper right portion of plot). Interestingly, the presence of a bottleneck also \textit{shortens} the transport delay to proximal compartments, compared to the uniform target distribution (Fig. 3E, lower left portion of plot). This occurs because cargo delayed by the bottleneck spreads throughout the proximal compartments, reaching higher levels earlier in the simulation.
 
-One non-obvious prediction of this analysis is that transport to distal compartments should be quickened by allowing higher levels of $u$ into the proximal compartments at steady-state (Fig. 3E). This might be tested experimentally by characterizing the convergence time of a retrogradely transported molecule that aggregates at recently activated synapses, such as \textit{Arc} mRNA (\citet{Steward_1998}, see discussion). To illustrate this in the model CA1 cell, we characterized the time course of transport to the distal apical dendrite (stimulating stratum lacunosum/moleculare), proximal apical dendrite (stimulating stratum radiatum), entire apical dendrite (stimulating both layers), and entire cell (seizure). Interestingly, the model converged more slowly to distal input alone, than to paired distal and proximal input, or to an entirely uniform distribution (Fig. 3F).
+One experimentally testable prediction of this analysis is that transport to distal compartments should be quickened by allowing higher levels of $u$ into the proximal compartments at steady-state (Fig. 3E).
+This might be tested experimentally by characterizing the convergence time of a retrogradely transported molecule that aggregates at recently activated synapses, such as \textit{Arc} mRNA (\citet{Steward_1998}, see discussion).
+To illustrate this in the model CA1 cell, we characterized the time course of transport to the distal apical dendrite (stimulating stratum lacunosum/moleculare), proximal apical dendrite (stimulating stratum radiatum), entire apical dendrite (stimulating both layers), and entire cell (seizure). Interestingly, the model converged more slowly to distal input alone, than to paired distal and proximal input, or to an entirely uniform distribution (Fig. 3F).
 
 \subsection*{Microtubular trafficking, detachment and degradation on separated time scales}
 
@@ -207,10 +209,13 @@ Figure 4E shows the behavior of an intermediate model, whose parameters are a li
 
 \subsection*{Non-specific cargo delivery occurs when time scales aren't separated}
 
-We have thusfar considered models that produce a desired distribution of cargo to arbitrary precision. However, real neurons might tolerate some sloppiness in synaptic trafficking (or even utilize it as a substrate for complex plasticity rules). Thus, we examined the consequences of relaxing the separation of time scales between transport and detachment. In general, this improves the speed at which cargoes are delivered to synapses, but decreases the accuracy or specificity of delivery.
+We have thusfar considered models that produce a desired distribution of cargo to arbitrarily high precision. However, real neurons probably tolerate some sloppiness in synaptic trafficking (or even utilize it as a substrate for complex plasticity rules). Thus, we examined the consequences of relaxing the separation of time scales between transport and detachment. In general, this improves the speed at which cargoes are delivered to synapses, but decreases the accuracy or specificity of delivery.
 
-To illustrate this, we considered an experiment in which cargo is delivered to recently activated synaptic sites.
+To appreciate this, consider an experiment where distal synaptic inputs on the apical tuft are stimulated (Fig. 5A). If the average detachment rate constants are sufficiently slow, then, as before, cargo is delivered selectively to the stimulated region (Fig. 5A, left). If we increase the detachment rates by a uniformly scaling, some cargo ``leaks off'' the microtubule path on its way to the distal synapses (Fig. 5A, right). We refer to this as a ``non-specific'' delivery of cargo, since cargo is not selectively delivered to the stimulated sites. \hl{In this case, non-specificity might induce on-the-path synaptic plasticity; a possibility that has some experimental evidence} \citep{Han_2013}.
 
+Tradeoff curves between the average detachment rate constant and the non-specificity of transport for this stimulation pattern are shown in figure 5B. Importantly, this tradeoff exists for both trafficking strategies we examined in figure 4. In this case, the uniform trafficking strategy (blue line in Fig. 5B; see Fig. 4D) outperforms the specific trafficking strategy (red line in Fig. 5B; see Fig. 4C) since the latter suffers from bottleneck in the proximal apical zone.
+
+Different patterns of non-specificity occur for other stimulation patterns. When the entire apical tree is stimulated, fast detachment can result in a complete occlusion of cargo delivery to distal synaptic sites (Fig. 5C). As before, a tradeoff between specificity and delivery speed is present for both transport strategies (Fig. 5D). Interestingly, the specific trafficking strategy outperforms the uniform trafficking strategy in this case (in contrast to Fig. 5A-B). This is due to the lack of a bottleneck, and the fact that the uniform trafficking strategy initially sends cargo to the basal dendrites where it is not released.
 
 \begin{figure}[!htbp]
 \begin{center}
@@ -220,9 +225,17 @@ To illustrate this, we considered an experiment in which cargo is delivered to r
 \end{center}
 \end{figure}
 
-\subsection*{Tradeoff between speed of consolidation and specificity of potentiation}
+\subsection*{Transport can be optimized for both speed and precision for a given stimulation pattern}
 
-We sought to understand the general relationship
+In figure 5, we showed that scaling the detachment rates ($c_i$), and leaving the transport rates ($a_i$,$b_i$) fixed produces a proximal bias in cargo delivery. That is, synapses closer to the soma are more likely to capture cargo at the expense of distal synapses. We reasoned that increasing the anterograde transport rate of cargo could correct for this bias, producing transport rules that are both fast and precise.
+
+We examined this possibility in a reduced model --- an unbranched cable --- so that we could develop simple heuristics that precisely achieve a desired distribution of cargo (more complex, \textit{ad hoc}, heuristics could be developed for complex morphologies). In the reduced model, cargo begins on the left end of the cable and is transported to a number of synaptic sites, each of which is modeled as a double-exponential curve.
+
+As before, cargo can be precisely delivered to a variety of stimulation patterns when the detachment rate is sufficiently slow (Fig. 6A); when the detachment rate is n\"iavely increased to speed up the rate of delivery, a proximal bias develops for all stimulation patterns (Fig. 6B). This bias is qualitatively exponential.
+
+We then hand-tuned the transport rate constants to deliver equal cargo to six evenly spaced synaptic sites (top row of Fig. 6C). Specifically, we increased the anterograde rate constants ($a_i$) and decreased the retrograde rate constants ($b_i$) by a decreasing linear function of position so that $a_N = b_N$ at the right side of the cable (see Methods). Intuitively, this pushes cargo past the proximal synaptic sites more quickly, canceling out the exponential delivery bias induced by fast detachment.
+
+However, this tuned transport model does not precisely deliver cargo for other stimulation patterns. When the number of synapses on the cable is decreased, a distal delivery bias is observed because too little cargo is released on the proximal portion of the cable (middle row, Fig. 6C). Even when the number of synapses is held constant, changing the position of the synapses can disrupt equal distribution of cargo. This is shown in the bottom row of figure 6C, where a distal bias again develops when the majority of activated synapses are positioned proximally. Thus, within the simple framework we've developed, the delivery of cargo can be tuned to achieve both precision and speed for a specified target distribution. However, non-specific cargo delivery occurs when different stimulation patterns are applied (assuming the transport parameters are not re-tuned).
 
 \begin{figure}[!htbp]
 \begin{center}
