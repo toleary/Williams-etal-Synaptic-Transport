@@ -1,5 +1,10 @@
 \begin{thebibliography}{}
 
+\bibitem[Bressloff and Newby, 2009]{Bressloff_2009}
+Bressloff, P. and Newby, J. (2009).
+\newblock {Directed intermittent search for hidden targets}.
+\newblock {\em New J. Phys.}, 11(2):023033.
+
 \bibitem[Bressloff, 2006]{Bressloff_2006}
 Bressloff, P.~C. (2006).
 \newblock {Stochastic model of protein receptor trafficking prior to
@@ -14,7 +19,7 @@ Buxbaum, A.~R., Haimovich, G., and Singer, R.~H. (2014a).
 
 \bibitem[Buxbaum et~al., 2014b]{Buxbaum_2014a}
 Buxbaum, A.~R., Wu, B., and Singer, R.~H. (2014b).
-\newblock {Single ~-Actin {mRNA} Detection in Neurons Reveals a Mechanism for
+\newblock {Single-Actin {mRNA} Detection in Neurons Reveals a Mechanism for
   Regulating Its Translatability}.
 \newblock {\em Science}, 343(6169):419--422.
 
@@ -111,6 +116,12 @@ Muller, M. J.~I., Klumpp, S., and Lipowsky, R. (2008).
 \newblock {\em Proceedings of the National Academy of Sciences},
   105(12):4609--4614.
 
+\bibitem[Newby and Bressloff, 2010]{Newby_2010}
+Newby, J. and Bressloff, P.~C. (2010).
+\newblock Local synaptic signaling enhances the stochastic transport of
+  motor-driven cargo in neurons.
+\newblock {\em Physical biology}, 7(3):036004.
+
 \bibitem[Puthanveettil et~al., 2008]{Puthanveettil_2008}
 Puthanveettil, S.~V., Monje, F.~J., Miniaci, M.~C., Choi, Y.-B., Karl, K.~A.,
   Khandros, E., Gawinowicz, M.~A., Sheetz, M.~P., and Kandel, E.~R. (2008).
@@ -122,6 +133,12 @@ Puthanveettil, S.~V., Monje, F.~J., Miniaci, M.~C., Choi, Y.-B., Karl, K.~A.,
 Smith, D. and Simmons, R. (2001).
 \newblock {Models of Motor-Assisted Transport of Intracellular Particles}.
 \newblock {\em Biophysical Journal}, 80(1):45--68.
+
+\bibitem[Soundararajan and Bullock, 2014]{Soundararajan_2014}
+Soundararajan, H.~C. and Bullock, S.~L. (2014).
+\newblock The influence of dynein processivity control, maps, and microtubule
+  ends on directional movement of a localising mrna.
+\newblock {\em eLife}, 3.
 
 \bibitem[Steward et~al., 2015]{Steward_2015}
 Steward, O., Farris, S., Pirbhoy, P.~S., Darnell, J., and Driesche, S. J.~V.
