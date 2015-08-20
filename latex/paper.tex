@@ -1,4 +1,6 @@
-\documentclass[fleqn,10pt]{wlpeerj}
+\documentclass[10pt]{wlpeerj}
+\usepackage{mathtools}
+
 \title{Trafficking synaptic materials in complex morphologies involves tradeoffs in speed and precision}
 
 \author[1,2]{Alex H Williams}
@@ -48,22 +50,22 @@ Transport along microtubules is mediated by kinesin and dynein motors, which med
 
 To obtain a general model that can accommodate variations in the biophysical details, we consider microtubule-based transport as a biased random walk along a one-dimensional cable \citep{Bressloff_2006}. For each time step, the cargo moves left, right, or remains the in the same place. In the simplest model, the probabilities associated with each movement are fixed and independent across each time step (Fig. 1B, top panel). This model can capture the movements of molecular motors that make short movements before changing directions. However, other motors exhibit sustained movements (CITE). This can be captured by incorporating \textit{hysteresis} or history-dependence into the model. In this case, we assume the cargo is more likely to continue in the same direction as the previous time step (Fig. 1B, bottom panel).
 
-While the position of individual cargoes can be highly stochastic, the net movement of a population of cargoes (Fig. 1C) is predictable. Figure 1D shows the distribution of 1000 molecules over time with (top panel) and without (bottom panel) history-dependence. In both cases, these simulations can be well-fit by an convection-diffusion partial differential equation, which is easier to analyze because it is deterministic and contains fewer variables (\cite{Smith_2001}; Fig. 1E-F).
+While the position of individual cargoes can be highly stochastic, the net movement of a population of cargoes (Fig. 1C) is predictable. Figure 1D shows the distribution of 1000 molecules over time with (top panel) and without (bottom panel) history-dependence. In both cases, these simulations can be well-fit by an convection-diffusion partial differential equation (Fig. 1E-F), which is easier to analyze because it is deterministic and contains fewer variables \citep{Smith_2001}.
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
 \begin{center}
-\includegraphics[width=1\columnwidth]{00_stochastic.png}
+\includegraphics[width=0.9\columnwidth]{00_stochastic.png}
 \caption{A simple mass-action model of dendritic transport}
 \end{center}
 \end{figure}
 
 The partial differential equation in Figure 1E can be approximated by discretizing a dendritic tree into small compartments, and considering the movement of cargo between neighboring compartments as a chemical reaction with first order kinetics. In an unbranched cable with $N$ compartments, the mass-action model is:
 \begin{equation}
-u_1 \underset{b_1}{\overset{a_1}{\rightleftharpoons}} u_2 \underset{b_2}{\overset{a_2}{\rightleftharpoons}} u_3 \underset{b_3}{\overset{a_3}{\rightleftharpoons}}~...~\underset{b_{N-1}}{\overset{a_{N-1}}{\rightleftharpoons}}  u_N
+u_1 \xrightleftharpoons[b_1]{a_1} u_2 \xrightleftharpoons[b_2]{a_2} u_3 \xrightleftharpoons[b_3]{a_3} ~...~ \xrightleftharpoons[b_{N-1}]{a_{N-1}} u_N
 \end{equation}
-where $u_i$ is the mass of cargo in each compartment, and $a_i$ and $b_i$ respectively denote local rate constants for anterograde and retrograde transport. If the compartments have equal volumes, then $u_i$ can equivalently be thought of as the molecule's concentration. Similar mass-action schemes can be constructed to model transport in branched morphologies (Fig. 1A).
+where $u_i$ is the amount of cargo in each compartment, and $a_i$ and $b_i$ respectively denote local rate constants for anterograde and retrograde transport; these parameters determine the local diffusion and drift coefficients as shown in figure 1E (see Methods). Similar mass-action schemes can be constructed to model transport in branched morphologies (Fig. 2A).
 
-A critical assumption of this model is that the movement of molecules between neighboring compartments is a stochastic and memoryless process. This assumption is reasonable if the run length of molecular motors is comparable to the size of the compartments; this appears to be the case under many \citep{Muller_2008,Verbrugge_2009}, thought not necessarily all \citep{Dynes_2007} circumstances (see Discussion). In simulations, we observed that this model was not very sensitive to violations of this assumption; the population dynamics of cargoes with substantial run lengths could still be well-fit by this class of models (Fig. 1F, lower panel; Supp Fig. NUMBER). [SHOULD THIS BE MOVED TO DISCUSSION?]
+A central assumption of this model is that the movement of molecules between neighboring compartments is a stochastic and memoryless process. This assumption is reasonable if the run length of molecular motors is comparable to the size of the compartments; this appears to be the case under many \citep{Muller_2008,Verbrugge_2009}, thought not necessarily all \citep{Dynes_2007} circumstances (see Discussion). In simulations, we observed that this model was not very sensitive to violations of this assumption; the population dynamics of cargoes with substantial run lengths could still be well-fit by this class of models (Fig. 1F, lower panel; Supp Fig. NUMBER). [SHOULD THIS BE MOVED TO DISCUSSION?]
 
 \subsection*{A simple rule achieves desired spatial distributions of cargo}
 
@@ -71,36 +73,32 @@ The exchange of $u$ between neighboring compartments approaches an equilibrium/s
 $$
 \frac{u_i}{u_{i+1}} \Bigg|_{ss} = \frac{b_i}{a_i}
 $$
-(see Methods). This result allows us to tune the local trafficking rates, $a_i$ and $b_i$, to produce a desired spatial distribution of molecular cargo. Let $\tilde{u}$ denote the desired steady-state level of $u$ in each compartment, we should select trafficking rate constants that satisfy:
+(see Methods). Thus, the local trafficking rates, $a_i$ and $b_i$, can be tuned to produce a desired spatial distribution of cargo. Let $\tilde{u}$ denote the desired steady-state level of $u$ in each compartment. For example, $\tilde{u}_i$ might refer to the local concentration of biochemical signal that ``tags'' synapses for plasticity (CITE); such a tag might be positively correlated to the desired level of delivered cargo. To match this desired distribution, the ratio of local trafficking rates should satisfy:
 $$
 \frac{b_i}{a_i} = \frac{\tilde{u}_i}{\tilde{u}_{i+1}}
 $$
 
-For example, we can create an linear gradient by specifying $\tilde{u}_i \propto i$. This results in $b_i / a_i =  i / i+1$. Figure 1B shows simulation data confirming that this model converges to a linear gradient at steady-state. Notice that the slope of the resulting linear gradient depends on the total amount of $u$ present in the cable; the transport rule only re-distributes $u$ so that its steady-state levels are \textit{proportional} to the desired levels (Fig. 1C). If the target distribution is normalized such that $\sum_i \tilde{u}_i = 1$, then the steady-state level in each compartment is given by:
-$$
-u_i \Big|_{ss} = \tilde{u}_i~ u_{\text{total}}
-$$
-where $u_{\text{total}} = \sum_i u_i$ is the total amount of $u$ in the neuron. The above results extend directly to branched morphologies (see Methods). For any pair of connected compartments:
-$$
-\frac{u_p}{u_c} \Bigg|_{ss} = \frac{b}{a}
-$$
-where $u_p$ is the level in the ``parent" compartment (closer to soma) and $u_c$ is the level in the ``child" compartment (closer to periphery); $b$ and $a$ refer to the trafficking rate constants between this pair of compartments.
+For example, we can create an linear gradient by specifying $\tilde{u}_i \propto i$ (Fig. 1B-C). The transport rule only determines the steady-state ratios of cargo in neighboring compartments; it cannot control the slope of the linear profile. Instead, the slope is controlled by tuning the total amount of cargo in the cable (Fig. 1C). These results extend directly to branched morphologies (see Methods). 
 
-The above rules could be locally implemented by simple biochemical reaction networks. Consider the cytoplasmic calcium concentration, $[ca]_i$, as a candidate second messenger. Increases in $[ca]_i$ simultaneously arrest anterograde and retrograde microtubular transport \citep{Wang_2009}. That is, for any pair of compartments, the anterograde rate constant is determined by calcium in the parent compartment, $a = f([ca]_p)$,  and the retrograde rate constant is determined by calcium in the child compartment, $b = f([ca]_c)$, where $f$ is a function that describes how calcium alters the transport rates. This satisfies equation (4) and results in $\tilde{u}_i = 1/f([ca]_i)$:
+%For any pair of connected compartments:
+%$$
+%\frac{u_p}{u_c} \Bigg|_{ss} = \frac{b}{a}
+%$$
+%where $u_p$ is the level in the ``parent" compartment (closer to soma) and $u_c$ is the level in the ``child" compartment (closer to periphery); $b$ and $a$ refer to the local transport rate constants between this pair of compartments.
+
+These rules could be locally implemented by simple biochemical reaction networks. Consider the cytoplasmic calcium concentration, $[ca]_i$, as a candidate second messenger. Increases in $[ca]_i$ simultaneously arrest anterograde and retrograde microtubular transport \citep{Wang_2009}. That is, for any pair of compartments, the anterograde rate constant is determined by calcium in the parent compartment, $a = f([ca]_p)$,  and the retrograde rate constant is determined by calcium in the child compartment, $b = f([ca]_c)$, where $f$ is a function that describes how calcium alters the transport rates. This satisfies equation (4) and results in $\tilde{u}_i = 1/f([ca]_i)$:
 $$
 \frac{b}{a} = \frac{f([ca]_c)}{f([ca]_p)} = \frac{\tilde{u}_p}{\tilde{u}_c}
 $$
 
-To test the plausibility of this simple model in a complex morphology, we used an existing reconstruction of a CA1 pyramidal neuron \citep{Migliore_2012} that includes complex voltage-dependent conductances and synapses. Excitatory synaptic input was delivered to 120 locations within three dendritic regions (red dots, Fig. 1D), and the average membrane potential in each electrical compartment determined the target level $\tilde{u}_i$ in each compartment (Methods). This models how molecular cargo could be selectively trafficked to active synaptic sites. Figures 2E and 2F confirm that the spatial distribution of $u$ approaches the desired steady-state.
+To test the plausibility of this model in a complex morphology, we used an existing reconstruction of a CA1 pyramidal neuron \citep{Migliore_2012} that includes complex voltage-dependent conductances and synapses. Excitatory synaptic input was delivered to 120 locations within three dendritic regions (red dots, Fig. 1D), and the average membrane potential in each electrical compartment determined the target level $\tilde{u}_i$ in each compartment (Methods). This models how molecular cargo could be selectively trafficked to active synaptic sites. Figures 2E and 2F confirm that the spatial distribution of $u$ approaches the desired steady-state.
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
 \begin{center}
-\includegraphics[width=1\columnwidth]{01_mass_action.png}
+\includegraphics[width=0.9\columnwidth]{01_mass_action.png}
 \caption{Delivery of cargo to active synapses in a complex dendritic tree}
 \end{center}
 \end{figure}
-
-; the stochastic model in figure 2 is related to this model by a simple rescaling (see Methods), so this analysis is applicable to both cases
 
 \subsection*{Convergence rate}
 
@@ -114,9 +112,9 @@ u_1 \underset{x}{\overset{\epsilon}{\rightleftharpoons}} u_2 \underset{\epsilon}
 $$
 We assume that $u$ begins at one end of the cable, and examine the how taking $\epsilon$ to zero affects the convergence rate. Figure 2B shows that the convergence rate slows dramatically as $\epsilon$ decreases. This can be can be analyzed using basic linear systems theory; the convergence rate is given by the non-zero eigenvalue with smallest magnitude, which can be thought of as a rate-limiting step or process for the system (Methods, Supp. Fig. 1). Simulations confirmed this analysis and showed that the convergence rate diverges to infinity as $\epsilon$ approaches zero (Fig. 2C).
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
 \begin{center}
-\includegraphics[width=1\columnwidth]{03_convergence.png}
+\includegraphics[width=0.9\columnwidth]{03_convergence.png}
 \caption{Bottlenecks in transport}
 \end{center}
 \end{figure}
@@ -162,6 +160,13 @@ d_4 \Bigg\downarrow \phantom{d_4} &
 $$
 As before, a molecule $u$ is transported along a network of microtubules (top row, in equation 6). In each compartment, molecules can irreversibly detach from the microtubules in a reaction $u_i \xrightarrow{c_i} u_i^\star$, where $u^\star$ denotes the biochemically active form of $u$, which is assumed to be inactive during transport. The final reaction, $u_i^\star \xrightarrow{d_i} \varnothing$, models degradation in each compartment. Note that only $u^\star$ is subject to degradation; the molecule is assumed to be protected from degradation during transport. This model can be extended to branched morphologies (Fig. 3A).
 
+\begin{figure}[!htbp]
+\begin{center}
+\includegraphics[width=0.9\columnwidth]{04_sushi_belt.png}
+\caption{Multiple strategies for transport in a model including nonuniform microtubular detachment/activation}
+\end{center}
+\end{figure}
+
 One way to analyze this system is to assume that these three processes --- trafficking, detachment, and degradation --- occur on separate timescales. If trafficking is sufficiently faster than detachment ($a,b \gg c$), then $u$ approaches a quasi-steady state distribution defined by our previous analysis (equation 5). We then choose detachment rate constants that transform the microtubular distribution into our desired distribution for $u^\star$:
 $$
 c_i \propto \frac{\tilde{u}^\star_i}{\tilde{u}_i}
@@ -174,18 +179,11 @@ Figure 4D shows the strategy on the other end of the spectrum. It begins by unif
 
 Figure 4E shows the behavior of an intermediate model, whose parameters are a linearly interpolation between the extreme strategies shown in Figure 4C and 4D. Thus, effective trafficking systems can be achieved by a spectrum of strategies, which may be suited to different situations and purposes (see Discussion). 
 
-\begin{figure}[h!]
-\begin{center}
-\includegraphics[width=1\columnwidth]{Fig3.png}
-\caption{Multiple strategies for transport in a model including nonuniform microtubular detachment/activation}
-\end{center}
-\end{figure}
-
 \subsection*{Non-local interactions can occur when time scales aren't separated}
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
 \begin{center}
-\includegraphics[width=0.7\columnwidth]{05_heterosynaptic.png}
+\includegraphics[width=0.9\columnwidth]{05_heterosynaptic_ca1.png}
 \caption{Heterosynaptic and non-local interactions.
 }
 \end{center}
@@ -195,11 +193,10 @@ Figure 4E shows the behavior of an intermediate model, whose parameters are a li
 
 We sought to understand the general relationship
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
 \begin{center}
-\includegraphics[width=0.5\columnwidth]{tradeoff.png}
-\caption{Tradeoff between speed of consolidation and specificity of potentiation.
-}
+\includegraphics[width=0.9\columnwidth]{06_heterosynaptic_cable.png}
+\caption{Tradeoff between speed of consolidation and specificity of potentiation.}
 \end{center}
 \end{figure}
 

@@ -25,7 +25,7 @@ L454.32 565.2
 L454.32 10.8
 L10.8 10.8
 z
-" style="fill:#ffffff;"/>
+" style="fill:none;"/>
   </g>
   <g id="pane3d_1">
    <g id="patch_3">
@@ -9949,7 +9949,7 @@ L495.9 150.483
 L495.9 425.517
 L495.9 426.6
 z
-" style="fill:#ffffff;stroke:#ffffff;stroke-linejoin:miter;stroke-width:0.01;"/>
+" style="fill:none;"/>
    </g>
    <g id="QuadMesh_1">
     <defs>
