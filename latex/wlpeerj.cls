@@ -189,7 +189,7 @@ THE ABSTRACT\vskip12pt}\let\go\relax\fi
 
 \renewcommand\Authfont{\fontsize{12}{12}\usefont{OT1}{phv}{b}{n}}
 %\renewcommand\Affilfont{\fontsize{10}{10}\usefont{OT1}{phv}{b}{n}}
-\renewcommand\Affilfont{\fontsize{10}{12}\usefont{OT1}{phv}{m}{n}}
+\renewcommand\Affilfont{\fontsize{10}{14}\usefont{OT1}{phv}{m}{n}}
 
 \newlength{\tocsep} 
 \setlength\tocsep{1.5pc} % Sets the indentation of the sections in the table of contents
