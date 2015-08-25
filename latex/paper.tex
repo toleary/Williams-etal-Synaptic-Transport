@@ -22,10 +22,11 @@
 \begin{abstract}
 Long lived changes in synaptic strength underlie persistent memories and in many cases require activity dependent transcription of plasticity-related genes.
 A well-known problem is to understand how appropriate gene products, such as synaptic proteins and mRNAs, get trafficked to the synapses that require them in spite of the complex dendritic arbors and thousands of postsynaptic sites typical of many neurons.
-We develop a biophysically-rooted model of microtubule transport, and identify procedures that produce desired distributions of cargo to arbitrarily high precision.
-Importantly, these transport systems can be plausibly encoded by simple, localized biochemical reactions.
+We develop a biophysically-rooted model of microtubule transport, and show how it can sustain arbitrarily complex distributions of cargo using simple, localized biochemical processes.
 The model predicts that the precise and flexible delivery of synaptic cargo requires the capture of synaptic cargo to occur on a slower timescale than the movement of cargo across the microtubule network.
-Thus, neurons must find a compromise between the specificity and speed with which synaptic materials are delivered and long-lived connectivity patterns are formed.
+Tuning the transport parameters reveals that optimal solutions exist, but sensitively depend on the location as well as the number of synapses, suggesting that biological neurons face a compromise between flexibility in connectivity and efficacy in regulating synaptic function.
+% final sentence is the same as that of the intro. Should paraphrase, but this could be the most important finding so it should be in both.
+
 \end{abstract}
 
 % OLD ABSTRACT:
@@ -45,21 +46,24 @@ Thus, neurons must find a compromise between the specificity and speed with whic
 \section*{Introduction}
 
 Neurons often have complex dendritic trees, reflecting the dense and structured synaptic connectivity that supports nervous system function.
-In order to maintain appropriate connectivity, or to alter it as a means of encoding memories, numerous enzymes and macromolecules need to be transported along dendrites to the synapses that need them.
-How is this logistical problem solved at the subcellular level? And how might a biologically plausible solution constrain the behavior of synaptic plasticity `rules' and learning in general?
+In order to establish and maintain appropriate connectivity, or to alter it as a means of encoding memories, numerous enzymes and macromolecules, including mRNAs and receptor proteins need to be transported along dendrites to the synapses that need them.
+How is this logistical problem solved at the subcellular level? And how might a biologically plausible solution constrain the macroscopic behavior of synaptic plasticity `rules' and learning in general?
 
 Transport along dendrites is mediated by motor proteins (kinesins and dyneins) that walk along microtubules, carrying cargo at a rate that far exceeds passive diffusion [REFS].
 The mechanisms that detach and sequester cargo at specific places in dendrites are not fully understood, but are known to depend on local biochemical signals that can be influenced by synaptic activity, such as transient elevations in cyclic AMP or $[Ca^{2+}]$ \cite{Mironov_2007,Wang_2009}.
-It is therefore conceivable that synaptic cargo transport is controlled in a distributed fashion, in which synapses that require cargo trigger its release from the motor protein complexes as they pass.
-This idea is a variant of the well-known synaptic tagging hypothesis \citep{Frey_1997}, which proposes that synapses produce a biochemical `tag' that signals a requirement for synaptic building blocks as part of the plasticity process.
-
 Not all aspects of synaptic plasticity require delivery of cargo from the soma. For example, some forms of long-term potentiation (LTP) depend on local protein synthesis and can function in isolated dendrites [REFS].
-However, in the long run, the mRNAs and the machinery that supports such plasticity needs to be replenished. Moreover, many long-lasting forms of synaptic plasticity rely on anterograde transport of mRNAs \citep{Kandel_2001,Puthanveettil_2008} and specific mRNAs are known to be selectively transported to regions of heightened synaptic activity \citep{Steward_1998,Steward_2001,Moga_2004} or to developing synaptic contacts \citep{Lyles_2006}.
-The interplay between global distribution and local plasticity mechanisms therefore demands attention.
+Nonetheless, components originating in the soma need to find their way to synapses in the first place and in the long run, the mRNAs and the machinery that supports local biosynthesis needs to be replenished.
+Moreover, many long-lasting forms of synaptic plasticity are known to depend on anterograde transport of mRNAs \citep{Kandel_2001,Puthanveettil_2008} and specific mRNAs are known to be selectively transported to regions of heightened synaptic activity \citep{Steward_1998,Steward_2001,Moga_2004} or to developing synaptic contacts \citep{Lyles_2006}.
 
-From simple assumptions about the dynamics of active dendritic transport we develop a model that can account for activity-dependent accumulation of molecular cargo at synaptic sites in realistic neuronal morphologies.
-Within this framework, we identify several ways in which local biochemical mechanisms can be orchestrated to produce arbitrarily complex distributions of molecular cargo.
-In addition to addressing the logistical challenges of dendritic transport, we identify several constraints the precision, flexibility, and speed of cargo delivery inherent to this model.
+These observations suggest that synaptic cargo transport is controlled in a distributed fashion, in which synapses that require cargo can trigger its release from motor protein complexes as they pass.
+This idea is a variant of the well-known synaptic tagging hypothesis \citep{Frey_1997}, which proposes that synapses produce a biochemical `tag' that signals a requirement for synaptic building blocks as part of the plasticity process.
+However, for molecular cargo to be distributed throughout a complex dendritic tree in a way that matches supply with local demand, the rates of sequestration of cargo need to approximately balance the rates of transport and production.
+Large imbalances in distribution rates of molecular cargo could conceivably lead to wasteful overproduction, harmful accumulation or depletion, or to severe delays in its delivery. 
+Although much is known about the molecular details of active transport and the coupling of synaptic activity to metabolism and trafficking of subcellular components, there is no general theory of how these details might fit together, nor how they affect higher-level neuronal functions such as synaptic plasticity neural circuit development.
+
+From simple, experimentally verifiable assumptions about the dynamics of active dendritic transport we develop a minimal model that can account for activity-dependent accumulation of molecular cargo at synaptic sites in realistic neuronal morphologies.
+Local biochemical signals are shown to be capable of producing arbitrarily complex distributions of molecular cargo, but there is an unavoidable tradeoff between the precision of cargo distribution and the rate of its delivery.
+Tuning the transport parameters reveals that optimal solutions exist, but sensitively depend on the location as well as the number of synapses, suggesting that biological neurons face a compromise between flexibility in connectivity and efficacy in regulating synaptic function.
 
 \hl{}
 
@@ -73,6 +77,8 @@ In addition to addressing the logistical challenges of dendritic transport, we i
 \caption{A simple mass-action model of dendritic transport}
 \end{center}
 \end{figure}
+
+Activation of synaptic receptors triggers downstream signalling cascades that can alter global gene expression [ref Greenberg, Bading, others] as well as modulating the trafficking and metabolism of molecular cargo locally [REFS]. [more on this]
 
 Transport along microtubules is mediated by kinesin and dynein motors, which mediate anterograde and retrograde transport, respectively \citep{Hirokawa_2010,Gagnon_2011}.
 Cargo is often simultaneously bound to both forms of motor protein, resulting in stochastic back-and-forth movements with a net direction determined by the balance of opposing movements \citep{Hancock_2014,Buxbaum_2014b} (Fig. 1A).
