@@ -70,7 +70,14 @@ In addition to addressing the logistical challenges of dendritic transport, we i
 \begin{figure}[!tb]
 \begin{center}
 \includegraphics[width=0.9\columnwidth]{00_stochastic.png}
-\caption{A simple mass-action model of dendritic transport}
+\caption{Model of microtubular transport.
+\textbf{(A)} Synaptic cargo, $u$, undergoes stochastic back-and-forth movements driven by opposing motor proteins.
+\textbf{(B)} Three example random walks on a cable representing the movement of individual cargoes. In a simple random walk, each movement is independent of previous movements (top panel); longer run lengths result from adding history-dependence to the model, such that each movement is likely to continue in the same direction as the previous step (bottom panel).
+\textbf{(C)} An ensemble of synaptic cargoes transported along the length of a neurite.
+\textbf{(D)} The concentration profile of transported cargo along a cable over time, simulated as 1,000 independent random walks. Simulations with (bottom) and without (top) history-dependence.
+\textbf{(E)} In the limit of many individual particles, the concentration of $u$ is modeled by the convection-diffusion partial differential equation. The parameters, $a$ and $b$, respectively scale the anterograde and retrograde rate of transport (see equation 1).
+\textbf{(F)} The convection-diffusion model provides a good fit for the simulations in panel D.
+}
 \end{center}
 \end{figure}
 
@@ -235,7 +242,10 @@ This model can be extended to branched morphologies (Fig. 3A).
 \begin{figure}[!tb]
 \begin{center}
 \includegraphics[width=0.9\columnwidth]{04_sushi_belt.png}
-\caption{Multiple strategies for transport in a model including nonuniform microtubular detachment/activation}
+\caption{Multiple strategies for transport in a model including nonuniform microtubular detachment/activation.
+\textbf{(A)} Schematic of microtubular transport model with irreversible detachment in a branched morphology. The localized degradation reactions ($u^{\star}_i \xrightarrow{d_i} \varnothing$) is omitted.
+\textbf{(B)} Multiple strategies for producing a desired distribution of activated biomolecules ($\tilde{u}^{\star}$). When the timescale of detachment/delivery is sufficiently slow, the distribution of cargo on the microtubules approaches a quasi-steady-state (transport step). This known distribution can then be transformed into the desired distribution for $\tilde{u}$ (detachment step). As long as these two steps are appropriately matched (blends of blue), then the desired distribution will be achieved (CA1 cell, right).
+\textbf{(C-E)} Normalized distributions of $u$ (red), $u^\star$ (blue), and $\tilde{u}^\star$ (black) as $t \rightarrow \infty$ for various strategies diagrammed in panel B (see circled red numbers). }
 \end{center}
 \end{figure}
 
@@ -269,7 +279,8 @@ In general, this improves the speed at which cargoes are delivered to synapses, 
 \begin{figure}[!tb]
 \begin{center}
 \includegraphics[width=0.9\columnwidth]{05_heterosynaptic_ca1.png}
-\caption{Heterosynaptic and non-local interactions.
+\caption{Proximal synapses capture more cargo at the expense of distal synapses when detachment rates are n\"iavely increased.
+\textbf{(A)} Delivery of cargo to the distal apical zone with slow \textit{(left)} and fast detachment rates \textit{(right)}. The steady-state cargo distribution does not match the stimulated pattern when detachment is fast. \textbf{(B)} Tradeoff curves between non-specificity and convergence rate for two trafficking strategies (blue line, see Fig 4D; red line, see Fig 4C). \textbf{(C-D)} Same as \textbf{(A-B)} but for cargo delivery to the entire apical tuft.
 }
 \end{center}
 \end{figure}
@@ -304,7 +315,12 @@ In the reduced model, cargo begins on the left end of the cable and is transport
 \begin{figure}[!tb]
 \begin{center}
 \includegraphics[width=0.9\columnwidth]{06_heterosynaptic_cable.png}
-\caption{Tradeoff between speed of consolidation and specificity of potentiation.}
+\caption{Producing speed and specificity for particular stimulation patterns does not extend to other patterns. Cargo begins on the left end and is transported to the right.
+\textbf{(A-C)} Steady-state cargo profiles (red) for three stimulation patterns (black arrows) along an unbranched cable.
+\textbf{(A)} When the timescale of detachment is sufficiently slow, cargo can be evenly distributed to the synapses regardless of their number and position. Transport parameters were set according to the procedure shown in figure 4D.
+\textbf{(B)} When detachment is n\"iavely increased (all rates multiplicatively scaled) a proximal bias in the steady-state distribution of cargo across all stimulation patterns.
+\textbf{(C)} Transport rate constants, $a_i$ and $b_i$, were tuned to optimize the distribution of cargo to six equally spaced synapses (top row); detachment rate constants were the same as in panel B. Changing the number of synapses (middle row) or the position of the synapses (bottom row) causes the unequal distribution of cargo to synapses.
+}
 \end{center}
 \end{figure}
 
