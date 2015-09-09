@@ -1,4 +1,6 @@
 name: ahwillia
+channels:
+    - https://conda.binstar.org/ioos
 dependencies:
 - cairo=1.12.18=4
 - fontconfig=2.11.1=4
