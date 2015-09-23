@@ -1,5 +1,10 @@
 \begin{thebibliography}{}
 
+\bibitem[Andreassi and Riccio, 2009]{Andreassi2009}
+Andreassi, C. and Riccio, A. (2009).
+\newblock To localize or not to localize: mrna fate is in 3′ utr ends.
+\newblock {\em Trends in cell biology}, 19(9):465--474.
+
 \bibitem[Bressloff and Newby, 2009]{Bressloff_2009}
 Bressloff, P. and Newby, J. (2009).
 \newblock {Directed intermittent search for hidden targets}.
@@ -140,6 +145,11 @@ Puthanveettil, S.~V., Monje, F.~J., Miniaci, M.~C., Choi, Y.-B., Karl, K.~A.,
   the Neurons of the Gill-Withdrawal Reflex}.
 \newblock {\em Cell}, 135(5):960--973.
 
+\bibitem[Rubenstein et~al., 2014]{Rubenstein2014}
+Rubenstein, M., Cornejo, A., and Nagpal, R. (2014).
+\newblock Programmable self-assembly in a thousand-robot swarm.
+\newblock {\em Science}, 345(6198):795--799.
+
 \bibitem[Smith and Simmons, 2001]{Smith_2001}
 Smith, D. and Simmons, R. (2001).
 \newblock {Models of Motor-Assisted Transport of Intracellular Particles}.
@@ -181,5 +191,11 @@ Wang, X. and Schwarz, T.~L. (2009).
 \newblock {The Mechanism of $Ca^{2+}$-Dependent Regulation of Kinesin-Mediated
   Mitochondrial Motility}.
 \newblock {\em Cell}, 136(1):163--174.
+
+\bibitem[Werfel et~al., 2014]{Werfel2014}
+Werfel, J., Petersen, K., and Nagpal, R. (2014).
+\newblock Designing collective behavior in a termite-inspired robot
+  construction team.
+\newblock {\em Science}, 343(6172):754--758.
 
 \end{thebibliography}

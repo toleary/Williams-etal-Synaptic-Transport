@@ -1,6 +1,7 @@
 \documentclass[10pt]{wlpeerj}
 \usepackage{mathtools}
 \usepackage{soul}
+\usepackage[utf8]{inputenc}
 
 \title{Trafficking synaptic cargo in complex morphologies involves tradeoffs in speed and precision}
 
@@ -45,12 +46,15 @@ Thus, neurons must find a compromise between the specificity and speed with whic
 \section*{Introduction}
 
 Neurons often have complex dendritic trees, reflecting the dense and structured synaptic connectivity that supports nervous system function.
-In order to maintain appropriate connectivity, or to alter it in response to external events, numerous enzymes and macromolecules must be repeatedly replenished and distributed amongst a staggering number of synaptic contacts.
-A human might draw inspiration from FedEx to design a solution based on transport hubs and an addressing system.
-However, it is unclear how such a sophisticated scheme could be implemented on a microscopic scale in a flexible and robust manner.
-Futhermore, other biological transport systems (e.g. in ant colonies; \cite{Deneubourg_1990}) utilize more decentralized strategies based on simple local cues and decisions.
-Is it possible to achieve reliable transport in dendrites without an addressing system?
-What are the limitations and potential advantages of a decentralized transport system, and how might these constrain the behavior of synaptic plasticity `rules' and, by extension, circuit connectivity?
+In order to maintain appropriate connectivity, or to alter it in response to external events, numerous enzymes and macromolecules must be repeatedly replenished and redistributed amongst a staggering number of synaptic contacts.
+Many human-designed transport and communication networks solve analogous problems by enumerating all possible destinations in an addressing system.
+A coarse addressing system might be implemented by localization sequences in the 3$'$-untranslated regions of mRNAs -- which, for example, control whether mRNA is sequestered in the nucleus or into dendrites \citep{Andreassi2009}.
+However, it is unclear whether a fine-scale dendritic addressing system is feasible or even desirable given the diversity of neural morphologies, the stochastic formation of synaptic contacts, and the changing demands of the system.
+
+Other biological systems (e.g. ant colonies) utilize decentralized transport strategies, which emerge from simple, local decisions made by a distributed population of agents \citep{Deneubourg_1990}.
+Such self-organizing systems often enjoy a number of advantageous properties -- including scalability, flexibility, and fault-tolerance -- and are therefore a topic of substantial current interest to roboticists and engineers \citep{Werfel2014,Rubenstein2014}.
+We asked how a decentralized transport system for synaptic cargo might be organized, ?
+How would a decentralized transport system be expected to behave, and how might constrain the behavior of synaptic plasticity `rules' and, by extension, circuit connectivity?
 
 Transport along dendrites is mediated by motor proteins (kinesins and dyneins) that walk along microtubules, carrying cargo at a rate that far exceeds passive diffusion [REFS].
 The mechanisms that detach and sequester cargo at specific places in dendrites are not fully understood, but are known to depend on local biochemical signals that can be influenced by synaptic activity, such as transient elevations in cyclic AMP or $[Ca^{2+}]$ \citep{Mironov_2007,Wang_2009}.
@@ -386,7 +390,47 @@ Other assumptions of the mass-action model - Second, the model assumes are many 
 
 \section*{Methods}
 
-\subsection*{Microtubule Transport Model (Fig. 1)}
+\subsection*{Model of single-particle transport}
+
+Let $x_n$ denote the position of a particle along a 1-dimensional cable at timestep $n$. Let $v_n$ denote the velocity of the particle at timestep $n$; for simplicity, we assume the velocity can take on three discrete values, $v_n = \{-1,0,1\}$, corresponding to a discrete retrograde movement, pause, or anterograde movement. As a result, $x_n$ is constrained to take on integer values. In the simplest model, we assume that $v_n$ is drawn with fixed probabilities $\mathbf{p} = \{p_{-},p_0,p_+\}$. The update rule for position is:
+$$x_{n+1} = x_n + v_n$$
+$$v_{n+1} = \left\{\begin{matrix}
+-1 & \text{with probability } p_-\\ 
+0 & \text{with probability } p_0\\  
+1 & \text{with probability } p_+
+\end{matrix}\right.$$
+
+Another possibility is that the velocity is updated in a history-dependent manner. For example, if the motor was moving in an anterograde direction on the previous timestep, then it may be more likely to continue to moving in that direction in the next time step. To incorporate this possibility, we change the velocity update rule to follow \textit{conditional} probabilities:
+$$v_{n+1} = \left\{\begin{matrix}
+-1 & \text{with probability } p(-|v_n)\\ 
+0 & \text{with probability } p(0|v_n)\\  
+1 & \text{with probability } p(+|v_n)
+\end{matrix}\right.$$
+We can summarize all of these conditional probabilities in a table:
+\begin{center}
+  \begin{tabular}{ l | c  c  c }
+    & $v_n=-1$ & $v_n=0$ & $v_n=1$ \\
+    \hline
+    $v_{n+1} = -1$ & $p(-|-)$ & $p(-|0)$ & $p(-|+)$ \\ 
+    $v_{n+1} = 0$  & $p(0|-)$ & $p(0|0)$ & $p(0|+)$ \\ 
+    $v_{n+1} = 1$  & $p(+|-)$ & $p(+|0)$ & $p(+|+)$ \\
+    \hline
+  \end{tabular}
+\end{center}
+The extreme case of this model occurs when the velocity never changes: 
+\begin{center}
+  \begin{tabular}{ l | c  c  c }
+    & $v_n=-1$ & $v_n=0$ & $v_n=1$ \\
+    \hline
+    $v_{n+1} = -1$ & $1$ & $0$ & $0$ \\ 
+    $v_{n+1} = 0$  & $0$ & $1$ & $0$ \\ 
+    $v_{n+1} = 1$  & $0$ & $0$ & $1$ \\
+    \hline
+  \end{tabular}
+\end{center}
+We introduce a parameter $k \in [0,1]$ to linearly interpolate between this extreme case and the first model (i.e. with each column given by $\mathbf{p} = \{0.20,0.35,0.45\}$). The rest of the panels in the figure show individual runs, 5000 molecule simulations, and mass action approximations for $k=0.25$ and $k=0.5$. All particles start at $x_0 = 0$ with $v_{-1}$ chosen randomly.
+
+\subsection*{Model of bulk/mass-action transport}
 Transport in an unbranched cable (equation 1) leads to the following system of differential equations:
 $$
 \begin{array}{lcl}
@@ -398,19 +442,22 @@ $$
 \dot{u}_N & = & a_{N-1} u_{N-1} - b_{N-1} u_N 
 \end{array}
 $$
-Similar systems result from branched mass-action models. The steady-state relationship in equation 5 can be immediately verified at either end of the cable:
+Similar systems result from branched mass-action models. The steady-state ratio of cargo in two neighboring compartments equals the ratio of transport rate constants (equation 2). This can be immediately verified at either end of the cable:
 $$
 \dot{u}_1 = 0 ~\Rightarrow~ -a_{1} u_{1} + b_{1} u_2 = 0 ~\Rightarrow~ \frac{u_1}{u_2} \Bigg |_{ss} = \frac{b_1}{a_1}
 $$
-The same procedure can be iteratively applied down the cable to show that equation 5 holds globally. The same result can be shown in a branched tree morphology. Here, each compartment has exactly one parent, but can have multiple children at branch points. Consider a parent-child pair of compartments, $u_p$ and $u_c$, with anterograde/retrograde transport rate constants $a$ and $b$. At steady-state, there is no net flux between $u_c$ and its children:
-$$
-\dot{u}_c = a u_p - b u_c + \underbrace{\sum_j (b_j u_j - a_j u_c)}_{= 0 \text{ , at ss}}
-$$
-Thus, we have:
-$$
-\dot{u}_c = a u_p - b u_c = 0 ~\Rightarrow~ \frac{u_p}{u_c} \Bigg |_{ss} = \frac{b}{a}
-$$
-To study how the system converges to steady-state, we can re-express the model as a matrix differential equation, $\mathbf{\dot{u}} = A \mathbf{u}$, where $\mathbf{u} = \left[ u_1, u_2, ... u_N \right]^T$ is the state vector, and $A$ is a matrix. For a general branched morphology, the matrix $A$ will be nearly tridiagonal, with off-diagonal elements corresponding to branch points; matrices in this form are called Hines matrices \citep{Hines_1984}. For the simpler case of an unbranched cable, $A$ is tridiagonal:
+Successively applying the same logic down the cable confirms the condition in equation 2 holds globally. A similar procedure (starting at the tips and moving in) can be applied to branched morphologies to prove the more general condition (equation 4).
+
+% The same result can be shown in a branched tree morphology. Here, each compartment has exactly one parent, but can have multiple children at branch points. Consider a parent-child pair of compartments, $u_p$ and $u_c$, with anterograde/retrograde transport rate constants $a$ and $b$. At steady-state, there is no net flux between $u_c$ and its children:
+% $$
+% \dot{u}_c = a u_p - b u_c + \underbrace{\sum_j (b_j u_j - a_j u_c)}_{= 0 \text{ , at ss}}
+% $$
+% Thus, we have:
+% $$
+% \dot{u}_c = a u_p - b u_c = 0 ~\Rightarrow~ \frac{u_p}{u_c} \Bigg |_{ss} = \frac{b}{a}
+% $$
+
+It is helpful to re-express the model as a matrix differential equation, $\mathbf{\dot{u}} = A \mathbf{u}$, where $\mathbf{u} = \left[ u_1, u_2, ... u_N \right]^T$ is the state vector, and $A$ is the state-transition matrix. For a general branched morphology, $A$ will be nearly tridiagonal, with off-diagonal elements corresponding to branch points; matrices in this form are called Hines matrices \citep{Hines_1984}. For the simpler case of an unbranched cable, $A$ is tridiagonal:
 $$
 A = 
  \begin{bmatrix}
@@ -424,7 +471,7 @@ A =
 $$
 For both branched and unbranched morphologies, each column of $A$ sums to zero, which reflects conservation of mass within the system. The rank of $A$ is exactly $N-1$ (this can be seen by taking the sum of the first $N-1$ rows, which results in $-1$ times the final row). Thus, the nullspace of $A$ is one-dimensional (red lines in Supp. Fig. 1).
 
-The desired distribution, $\mathbf{\tilde{u}}$, is an eigenvector that spans the nullspace of $A$. All other eigenvalues $A$ are negative, which can be shown using the Gershgorin circle theorem. The convergence rate is determined by the non-zero eigenvalue with smallest magnitude of $A$. We can increase the convergence rate (while still maintaining $\mathbf{\tilde{u}}$) by multiplying all rate constants by some common value. However, this trivial strategy ignores the fact that there are biophysical limits on how fast molecular motors can move.
+The desired steady-state distribution, $\mathbf{\tilde{u}}$, is an eigenvector that spans the nullspace of $A$. It is simple to show that all other eigenvalues $A$ are negative using the Gershgorin circle theorem; thus, the fixed point described by equations 2 and 4 is stable. The convergence rate is determined by the non-zero eigenvalue with smallest magnitude of $A$. We can increase the convergence rate (while still achieving $\mathbf{\tilde{u}}$) by multiplying all rate constants by some common value. However, this trivial strategy ignores the fact that there are biophysical limits on how fast molecular motors can move.
 
 \subsection*{Stochastic Model of Transport}
 

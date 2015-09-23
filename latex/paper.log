@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  2 SEP 2015 12:25
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  13 SEP 2015 10:19
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -609,19 +609,19 @@ Package: soul 2003/11/17 v2.4 letterspacing/underlining (mf)
 ) (./paper.aux)
 \openout1 = `paper.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Try loading font information for OT1+ptm on input line 39.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 40.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
@@ -721,8 +721,8 @@ Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
 Package lastpage Info: Please have a look at the pageslts package at
 (lastpage)             https://www.ctan.org/pkg/pageslts
-(lastpage)             ! on input line 39.
-LaTeX Info: Redefining \microtypecontext on input line 39.
+(lastpage)             ! on input line 40.
+LaTeX Info: Redefining \microtypecontext on input line 40.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
@@ -735,7 +735,7 @@ Package microtype Info: No adjustment of character kerning.
 (/usr/local/texlive/2015/texmf-dist/tex/latex/microtype/mt-ptm.cfg
 File: mt-ptm.cfg 2006/04/20 v1.7 microtype config. file: Times (RS)
 )
-LaTeX Font Info:    Try loading font information for OT1+phv on input line 42.
+LaTeX Font Info:    Try loading font information for OT1+phv on input line 43.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/ot1phv.fd
 File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
@@ -745,10 +745,10 @@ Package microtype Info: Loading generic settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <10> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 42.
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 43.
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <20> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 42.
-LaTeX Font Info:    Try loading font information for OT1+ztmcm on input line 42
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 43.
+LaTeX Font Info:    Try loading font information for OT1+ztmcm on input line 43
 .
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/ot1ztmcm.fd
@@ -758,30 +758,30 @@ Package microtype Info: Loading generic settings for font family
 (microtype)             `ztmcm' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-LaTeX Font Info:    Try loading font information for OML+ztmcm on input line 42
+LaTeX Font Info:    Try loading font information for OML+ztmcm on input line 43
 .
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/omlztmcm.fd
 File: omlztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OML/ztmcm.
 )
-LaTeX Font Info:    Try loading font information for OMS+ztmcm on input line 42
+LaTeX Font Info:    Try loading font information for OMS+ztmcm on input line 43
 .
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/omsztmcm.fd
 File: omsztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMS/ztmcm.
 )
-LaTeX Font Info:    Try loading font information for OMX+ztmcm on input line 42
+LaTeX Font Info:    Try loading font information for OMX+ztmcm on input line 43
 .
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/omxztmcm.fd
 File: omxztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMX/ztmcm.
 )
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 42.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 43.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 42.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 43.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 42.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 43.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
@@ -790,77 +790,92 @@ File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 42.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 43.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 42.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 43.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 42.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 43.
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <12> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 42.
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 43.
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <9> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 42.
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 43.
  [1
 
 {/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-<00_stochastic.png, id=11, 569.12625pt x 351.2322pt>
+<00_stochastic.png, id=10, 569.12625pt x 351.2322pt>
 File: 00_stochastic.png Graphic file (type png)
  <use 00_stochastic.png>
-Package pdftex.def Info: 00_stochastic.png used on input line 76.
+Package pdftex.def Info: 00_stochastic.png used on input line 80.
 (pdftex.def)             Requested size: 373.61061pt x 230.58131pt.
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+[2]
+Underfull \vbox (badness 1259) has occurred while \output is active []
 
- [2 <./00_stochastic.png>] <01_mass_action.png, id=18, 704.27115pt x 315.45856p
+ [3 <./00_stochastic.png>] <01_mass_action.png, id=24, 704.27115pt x 315.45856p
 t>
 File: 01_mass_action.png Graphic file (type png)
 
 <use 01_mass_action.png>
-Package pdftex.def Info: 01_mass_action.png used on input line 121.
+Package pdftex.def Info: 01_mass_action.png used on input line 125.
 (pdftex.def)             Requested size: 373.61061pt x 167.35107pt.
- [3] [4 <./01_mass_action.png>]
+ [4 <./01_mass_action.png>]
 <03_convergence.png, id=30, 576.57005pt x 389.10168pt>
 File: 03_convergence.png Graphic file (type png)
 
 <use 03_convergence.png>
-Package pdftex.def Info: 03_convergence.png used on input line 178.
+Package pdftex.def Info: 03_convergence.png used on input line 182.
 (pdftex.def)             Requested size: 373.61061pt x 252.13533pt.
  [5]
-<04_sushi_belt.png, id=36, 551.85371pt x 307.00296pt>
-File: 04_sushi_belt.png Graphic file (type png)
- <use 04_sushi_belt.png>
-Package pdftex.def Info: 04_sushi_belt.png used on input line 248.
-(pdftex.def)             Requested size: 373.61061pt x 207.84576pt.
+Underfull \vbox (badness 1077) has occurred while \output is active []
 
-[6 <./03_convergence.png>] [7 <./04_sushi_belt.png>]
+ [6 <./03_convergence.png>] <04_sushi_belt.png, id=41, 551.85371pt x 307.00296p
+t>
+File: 04_sushi_belt.png Graphic file (type png)
+
+<use 04_sushi_belt.png>
+Package pdftex.def Info: 04_sushi_belt.png used on input line 252.
+(pdftex.def)             Requested size: 373.61061pt x 207.84576pt.
+ [7 <./04_sushi_belt.png>]
 <05_heterosynaptic_ca1.png, id=47, 349.7868pt x 264.5082pt>
 File: 05_heterosynaptic_ca1.png Graphic file (type png)
 
 <use 05_heterosynaptic_ca1.png>
-Package pdftex.def Info: 05_heterosynaptic_ca1.png used on input line 285.
+Package pdftex.def Info: 05_heterosynaptic_ca1.png used on input line 289.
 (pdftex.def)             Requested size: 373.61061pt x 282.52452pt.
  [8 <./05_heterosynaptic_ca1.png>]
 <06_heterosynaptic_cable.png, id=52, 695.2374pt x 485.6544pt>
 File: 06_heterosynaptic_cable.png Graphic file (type png)
 
 <use 06_heterosynaptic_cable.png>
-Package pdftex.def Info: 06_heterosynaptic_cable.png used on input line 321.
+Package pdftex.def Info: 06_heterosynaptic_cable.png used on input line 325.
 (pdftex.def)             Requested size: 373.61061pt x 260.98969pt.
  [9 <./06_heterosynaptic_cable.png>] [10]
-[11] (./paper.bbl [12]
+[11] [12] (./paper.bbl
+
+! Package inputenc Error: Unicode char \u8:′ not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.5 ...ze or not to localize: mrna fate is in 3′
+                                                   utr ends.
+? 
+[13]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [13])
+ [14])
 
 AED: lastpage setting LastPage
-[14] (./paper.aux) ) 
+[15] (./paper.aux) ) 
 Here is how much of TeX's memory you used:
- 9246 strings out of 493089
- 135648 string characters out of 6134842
- 359981 words of memory out of 5000000
- 12308 multiletter control sequences out of 15000+600000
- 59471 words of font info for 244 fonts, out of 8000000 for 9000
+ 9262 strings out of 493089
+ 135888 string characters out of 6134842
+ 360091 words of memory out of 5000000
+ 12318 multiletter control sequences out of 15000+600000
+ 59791 words of font info for 248 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 43i,16n,45p,1482b,418s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 43i,16n,45p,1482b,433s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/base/8r
 .enc}</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.
 pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.p
@@ -875,10 +890,10 @@ ve/2015/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/local/texlive/2015/tex
 mf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2015/texmf-dist/fo
 nts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/
 urw/times/utmri8a.pfb>
-Output written on paper.pdf (14 pages, 2540506 bytes).
+Output written on paper.pdf (15 pages, 2544367 bytes).
 PDF statistics:
- 116 PDF objects out of 1000 (max. 8388607)
- 74 compressed objects within 1 object stream
+ 119 PDF objects out of 1000 (max. 8388607)
+ 76 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  39967 words of extra memory for PDF output out of 42996 (max. 10000000)
 
