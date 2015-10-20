@@ -1,0 +1,9 @@
+Things to cite:
+
+Diffusion is spiny dendrites is slow, another reason for active transport? This also (somewhat) justifies us not explicitly modeling the diffusion of particles after they are released from the microtubules. This provides a mechanism for the accumulation of plasticity-related factors at synaptic spines.
+
+	http://www.sciencedirect.com/science/article/pii/S0896627306008245
+
+Modeling study related to the above paper:
+	
+	http://dx.doi.org/10.1103/PhysRevLett.101.218102
