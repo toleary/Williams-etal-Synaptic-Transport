@@ -1,0 +1,552 @@
+\documentclass[11pt]{wlpeerj}
+\usepackage{mathtools}
+\usepackage{soul}
+\usepackage{setspace}
+%\doublespacing
+
+\title{Trafficking synaptic cargo involves tradeoffs in speed and precision}
+
+\author[1,2,3,*]{Alex H. Williams}
+\author[2]{Cian O'Donnell}
+\author[4]{Eve Marder}
+\author[2,5]{Terrence Sejnowski}
+\author[4,*]{Timothy O'Leary}
+
+\affil[1]{Department of Neurosciences, University of California, San Diego, La Jolla, CA 92093, USA}
+\affil[2]{Howard Hughes Medical Institute, Salk Institute for Biological Studies, La Jolla, CA 92037, USA}
+\affil[3]{Department of Neurobiology, Stanford University, Stanford, CA 94305, USA}
+\affil[4]{Volen Center and Biology Department, Brandeis University, Waltham, MA 02454, USA}
+\affil[5]{Division of Biological Sciences, University of California at San Diego, La Jolla, CA 92093, USA}
+\affil[*]{Address correspondence to: ahwillia@stanford.edu, toleary@brandeis.edu}
+
+\keywords{Synaptic tagging hypothesis, LTP, Transport, Morphology}
+
+\begin{abstract}
+Neurons form, maintain, and modify complex connectivity patterns by regulating the spatial distribution of organelles and macromolecules throughout their dendritic arbors. Previous work suggests that localized biochemical signals influence the trafficking, delivery and expression of molecular cargo along microtubules. However, it remains unclear whether purely local mechanisms can be orchestrated to provide adequate transport. We mathematically formalized a previously proposed ``sushi belt'' model of microtubule transport \citep{Doyle_2011} and showed that arbitrarily complex spatial distributions of cargo can indeed be achieved by localized mechanisms. However, this model predicts an unavoidable tradeoff between speed and precision of cargo delivery that can be tested experimentally. Reliable cargo delivery required that cargo transport along microtubules occur on a faster timescale than cargo dissociation from the microtubules. Increasing the cargo dissociation rate provided faster transport, but required complex, global re-tuning of the trafficking rates to maintain precision. Additionally, these solutions tended to be fragile in the sense that small changes in the target distribution led to large changes in the optimal delivery strategy. Together, these results suggest that macromolecules with stereotyped expression patterns might be tuned for fast and precise transport, but cargoes requiring plastic expression patterns face a tradeoff in the speed and precision of transport.
+
+\end{abstract}
+
+\begin{document}
+
+\flushbottom
+\maketitle
+\thispagestyle{empty}
+
+\section*{Introduction}
+
+Neurons often have complex dendritic trees, reflecting the dense and structured synaptic connectivity that supports nervous system function.
+In order to maintain appropriate connectivity, or to alter it in response to changes in circuit activity, numerous enzymes and macromolecules must be continually replenished and distributed among a large number of synaptic contacts.
+Although the molecular machinery that solves this logistical problem has been characterized in increasing detail \citep{Doyle_2011,Buxbaum_2014b,Hancock_2014}, there are few attempts to formalize how subcellular transport processes constrain a neuron's ability to regulate its connectivity and synaptic function.
+
+Not all aspects of neurite metabolism require delivery of cargo from the soma. For example, some forms of long-term potentiation (LTP) depend on local protein synthesis and can function in isolated dendrites \citep{Kang1996,Aakalu:2001aa,vickers2005induction,Sutton:2006aa}.
+Nonetheless, components originating in the soma need to find their way to synapses in the first place, and in the long run, the mRNAs and the machinery that supports local biosynthesis needs to be replenished.
+Moreover, many long-lasting forms of synaptic plasticity are known to depend on anterograde transport of mRNAs \citep{Kandel_2001,Puthanveettil_2008} and specific mRNAs are known to be selectively transported to regions of heightened synaptic activity \citep{Steward_1998,Steward_2001,Moga_2004} or to developing synaptic contacts \citep{Lyles_2006}.
+These observations fit with the well-known synaptic tagging hypothesis \citep{Frey_1997}, which proposes that synapses produce a biochemical `tag' that signals a requirement for synaptic building blocks as part of the plasticity process.
+
+Kinesin and dyenin motor proteins mediate transport along microtubules at rates that far exceed passive diffusion \citep{Block_1990,Smith_2001,Hirokawa_2010,Gagnon_2011,park2014visualization}.
+In many cases, the movement of individual cargoes is stochastic and bidirectional \citep{Hancock_2014}, leading to the hypothesis that motor proteins ``search'' the dendritic tree for dropoff locations, instead of following a pre-determined path \citep{Welte2004,Bressloff_2009,Doyle_2011}.
+Thus, the local rate of transport and the decision to release cargo are thought to be controlled by localized signaling pathways, rather than a centralized addressing system.
+These localized mechanisms are not fully understood, but are believed to involve transient elevations in second-messengers like $[Ca^{2+}]$ and ADP \citep{Mironov_2007,Wang_2009,Buxbaum_2014a}, and changes in microtubule-associate proteins \citep{Soundararajan_2014}.
+These pathways are, in turn, influenced by the spatial pattern of synaptic activity, spontaneous release of calcium from internal stores, and locally released factors from other cells \citep{Wong2002,Parrish2007,Park2013,Zagrebelsky2014}.
+The composition and expression of molecular cargo is also influenced by global factors, such as the cell's average activity level \citep{Spitzer2006,Puthanveettil_2008,Turrigiano2011} and localization sequences within 3$'$-untranslated regions of mRNA, which act as a coarse addressing system \citep{Andreassi2009}.
+
+%However, it is not know how intracellular cargo can be targeted on a finer scale in a way that responds to varying demand.
+
+Here, we aim to express and examine existing conceptual models of molecular transport \citep{Doyle_2011} in a mathematical framework.
+We develop a minimal biophysical model that can account for activity-dependent accumulation of molecular cargo at synaptic sites in realistic neuronal morphologies, and show that biochemical signals can indeed produce complex spatial expression patterns by locally modifying the movement and release of cargo.
+However, we find that decentralized transport strategies face unavoidable tradeoffs between the speed and precision of cargo delivery.
+Tuning the transport parameters reveals that while optimal solutions exist to circumvent this tradeoff, these solutions sensitively depend on the location as well as the number of synapses, suggesting that biological neurons may face a compromise between flexibility in connectivity and their ability to precisely regulate synaptic function.
+
+\section*{Results}
+
+\subsection*{Model description}
+
+Transport along microtubules is mediated by kinesin and dynein motors, which mediate anterograde and retrograde transport, respectively \citep{Hirokawa_2010,Gagnon_2011}.
+Cargo is often simultaneously bound to both forms of motor protein, resulting in stochastic back-and-forth movements with a net direction determined by the balance of opposing movements \citep{Welte2004,Hancock_2014,Buxbaum_2014b} (Fig. 1A).
+
+To obtain a general model that can accommodate variations in the biophysical details, we consider microtubule-based transport as a biased random walk along a one-dimensional cable \citep{Bressloff_2006,Bressloff_2009,Newby_2010,Bressloff_2013}.
+For each time step, the cargo moves forwards, backwards, or remains in the same place with different probabilities that together sum to 1.
+In the simplest model, the probabilities associated with each movement are fixed and independent across each time step, with the forward jump more probable than a reverse jump, leading to a biased random walk (Fig. 1B, top panel).
+A potentially more realistic model (see, e.g., \cite{Muller_2008}) incorporates hysteresis into the biased random walk (see Methods). In this case, the cargo is more likely to continue in the same direction as it moved during the previous time step, leading to extended runs in one direction along the microtubule (Fig. 1B, bottom panel).
+
+\begin{figure}[!t]
+\begin{center}
+\includegraphics[width=0.9\columnwidth]{00_stochastic.png}
+\caption{Model of microtubular transport.
+\textbf{(A)} Molecular cargo, $u$, undergoes stochastic back-and-forth movements driven by opposing motor proteins.
+\textbf{(B)} Three example random walks on a cable representing the movement of individual cargoes. In a simple random walk, each movement is independent of previous movements (top panel); longer run lengths result from adding history-dependence to the model, such that each movement is likely to continue in the same direction as the previous step (bottom panel).
+\textbf{(C)} An ensemble of synaptic cargoes transported along the length of a neurite.
+\textbf{(D)} The concentration profile of transported cargo along a cable over time, simulated as 1,000 independent random walks. Simulations with (bottom) and without (top) history-dependence.
+\textbf{(E)} In the limit of many individual particles, the concentration of $u$ is described by a mass-action model (equation 1). The parameters $a$ and $b$ respectively scale the anterograde and retrograde rate of transport.
+\textbf{(F)} The mass-action model provides a good fit for the simulations in panel D.
+}
+\end{center}
+\end{figure}
+
+While the position of individual cargoes is highly stochastic, the net movement of a population of cargoes (Fig. 1C) is predictable.
+Figure 1D shows the distribution of 1000 molecules over time with (top panel) and without (bottom panel) hysteresis.
+Thus, the bulk trafficking of cargo can be modeled as a deterministic process, which we refer to as the ``mass-action model'' of transport. The model discretizes the dendritic tree into small compartments, and describes the transfer of cargo between neighboring compartments as reactions with first order kinetics. In a cable with $N$ compartments, the mass-action model is (Fig. 1E):
+\begin{equation}
+u_1 \xrightleftharpoons[b_1]{a_1} u_2 \xrightleftharpoons[b_2]{a_2} u_3 \xrightleftharpoons[b_3]{a_3} ~...~ \xrightleftharpoons[b_{N-1}]{a_{N-1}} u_N
+\end{equation}
+where $u_i$ is the amount of cargo in each compartment, and $a_i$ and $b_i$ respectively denote local rate constants for anterograde and retrograde transport. The mass-action model with spatially uniform transport rates (Fig. 1F) reproduces the dynamics of the ensemble simulations (Fig. 1D). In this case, the mass-action model maps onto the well-known drift-diffusion equation (see \textit{Methods}).
+
+The mass-action model makes two important assumptions. It first assumes that the net movement of molecules between neighboring compartments is a stochastic and memoryless process. This assumption is reasonable for cargoes that change direction often; specifically, on a length scale comparable to the size of the compartments. This appears to be the case under many \citep{Muller_2008,Verbrugge_2009}, though not necessarily all \citep{Dynes_2007,Soundararajan_2014} circumstances. However, we observed that the mass-action model could still be well-fit to simulated data where this assumption was violated (Fig. 1F, lower panel). In fact, the mass-action model only breaks down in the limit of very large run lengths (i.e. unidirectional, non-stochastic transport; see \textit{Methods}).
+
+The second assumption of the mass-action model is that there are many transported particles distributed throughout the dendritic tree. Many types of dendritic cargo are present in high numbers \hl{(CITE)}, and a deterministic model can provide a good approximation in this regime (Fig. 1D). The model also provides insight into the stochastic dynamics of transport for cargoes with fewer copy numbers. Instead of interpreting $u$ as the amount of cargo in each compartment, this variable (when appropriately normalized) can be interpreted as the probability that a single particle lies within a particular compartment. The mass-action model captures average, or expected, behavior of the ensemble, with noise inversely proportional to the square root of the number of copies of cargo (see \textit{Methods}). 
+
+\subsection*{A simple transport mechanism distributes cargo according to demand}
+
+We used the mass-action model for our simulations because it is easy to extend it to branched morphologies (Fig. 2A), and to cases where the trafficking rate constants ($a_i$ and $b_i$) are spatially non-uniform.
+This corresponds to the kinetics of motor proteins depending on local biochemical signals \citep{Mironov_2007,Wang_2009,Soundararajan_2014}.
+
+In the model, the exchange of cargo between compartments approaches a equilibrium, or steady-state ($ss$), distribution over time (see \textit{Methods}). The equilibrium occurs when no net movement of cargo occurs between connected compartments. Mathematically, this occurs when:
+\begin{equation}
+\frac{u_p}{u_c} \Bigg|_{ss} = \frac{b}{a}
+%\frac{b}{a} = \frac{\tilde{u}_p}{\tilde{u}_c}
+\end{equation}
+where $u_p$ is the level in the ``parent" compartment (closer to soma) and $u_c$ is the level in the ``child" compartment (closer to periphery); $b$ and $a$ refer to the trafficking rate constants between this pair of compartments.
+
+Intuitively, in the mass-action model, the rate of cargo transfer is proportional to the concentration of cargo and the trafficking rate constant. Thus, the flow of cargo is equal and opposite when the ratio of cargo matches the reciprocal ratio of the rate constants between a pair of connected compartments.
+
+The above result means that the trafficking rates can be locally tuned to produce a desired spatial distribution of cargo. Denote the desired steady-state level of cargo in each compartment by $\tilde{u}$ (we will soon show how this can be encoded by a localized biochemical signal). To match this desired distribution, the ratio of local trafficking rates should satisfy:
+\begin{equation}
+\frac{b}{a} = \frac{\tilde{u}_p}{\tilde{u}_c}
+\end{equation}
+
+\begin{figure}[!tb]
+\begin{center}
+\includegraphics[width=0.9\columnwidth]{01_mass_action.png}
+\caption{Local trafficking parameters determine the spatial distribution of biomolecules by a simple rule.
+\textbf{(A)} Diagram of the mass action transport model for a simple branched morphology.
+%The steady-state ratio of $u$ between any two neighboring compartments is equal to the reciprocal ratio of the trafficking rate constants between those compartments.
+\textbf{(B)} A simulation of a nine compartment cable, with trafficking rate constants set to produce a linear gradient using the steady-state relation shown in panel A.
+%The initial distribution of $u$ is uniform (t=0); over time the system achieves the desired linear gradient (steady-state occurs around t=5, in this example).
+\textbf{(C)} The slope of the linear gradient shown in panel B is directly proportional to the total amount of cargo in the model ($\sum_i u_i$); the slope increases with increasing cargo levels, but the linear profile is preserved.
+\textbf{(D)} A model of a CA1 pyramidal cell with 742 compartments adapted from \cite{Migliore_2012}; excitatory synapses were added at the locations marked by red dots. 
+\textbf{(E)} The average membrane potential in each compartment of the CA1 model cell was used to define a desired spatial distribution, and transport rate constants were chosen according to equation (4). The desired spatial distribution of cargo emerges over time, after starting in the soma.
+\textbf{(F)} The desired and steady-state profile of cargo for each compartment in the simulation shown in panel E.
+}
+\end{center}
+\end{figure}
+
+For example, we can produce a linear expression gradient \citep{Magee_1998,Hoffman_1997} by setting $\tilde{u}$ directly proportional to the distance from the soma.
+This produces trafficking rate constants that satisfy $b_i / a_i = i / i + 1$ (where $i$ indexes on increasing distance to the soma).
+Figure 2B-C shows that this rule produces the expected profile, with the slope of the linear gradient controlled by tuning the total amount of cargo in the cable (Fig. 2C).
+
+Together, this analysis shows that by manipulating local trafficking rates, arbitrary distributions of cargo can be achieved over time. Local trafficking rates, in turn, can be modulated by a simple biochemical reaction resulting from synaptic activation or local release of a growth factor. We can consider the local cytoplasmic calcium concentration, $[ca]_i$, as an candidate second messenger. Increases in $[ca]_i$ simultaneously arrest anterograde and retrograde microtubular transport for certain cargoes \citep{Wang_2009}. Thus, for any pair of compartments, the anterograde rate constant is determined by calcium in the parent compartment, $a = f([ca]_p)$,  and the retrograde rate constant is determined by calcium in the child compartment, $b = f([ca]_c)$, where $f$ is a function that describes how calcium alters the transport rates. This results in:
+\begin{equation}
+\frac{b}{a} = \frac{f([ca]_c)}{f([ca]_p)} = \frac{\tilde{u}_p}{\tilde{u}_c}
+\end{equation}
+where $\tilde{u}_i = 1/f([ca]_i)$.
+
+Thus, in principle, local calcium transients that serve to arrest transport could provide a mechanism for distributing cargo to an arbitrary target profile.
+To demonstrate the plausibility of this model in a complex morphology, we extended an existing multi-compartment model of a CA1 pyramidal neuron \citep{Migliore_2012}. Excitatory synaptic input was delivered to 120 locations within three dendritic regions (red dots, Fig. 2D), and the average membrane potential in each electrical compartment determined the target level ($\tilde{u}_i$) in each compartment (Methods). This models how molecular cargo could be selectively trafficked to active synaptic sites. Figures 2E and 2F confirm that the spatial distribution of $u$ approaches the desired steady-state.
+
+\subsection*{Convergence rate}
+
+Biochemical processes are time-sensitive.
+For example, newly synthesized proteins must be delivered to synapses within $\sim$1 hour to support long-term potentiation in CA1 pyramidal cells \citep{Frey_1997,Frey_1998}.
+We therefore examined how quickly the spatial pattern of cargo converged to its target distribution.
+
+In equations (3) and (4), we implicitly required each $\tilde{u}_i > 0$ in order to avoid division by zero.
+Intuitively, if $\tilde{u}_i = 0$ for some compartment, then no cargo can flow through that compartment, cutting of more peripheral compartments from the transport system.
+Similarly, if certain $\tilde{u}_i$ are nearly equal to zero, then transport through these compartments will act as a bottleneck for transport, and convergence to the desired distribution will be slow.
+
+Figure 3A-C illustrates and analyzes a bottleneck in a simple three compartment model.
+The two compartments on the end of the cable have the same desired level, $\tilde{u}_1 = \tilde{u}_3$; the middle compartment acts as a bottleneck when $\tilde{u}_2$ is very small (Fig. 3A).
+This results in the mass-action model:
+\begin{equation}
+u_1 \underset{x}{\overset{\epsilon}{\rightleftharpoons}} u_2 \underset{\epsilon}{\overset{x}{\rightleftharpoons}} u_3
+\end{equation}
+We assume that $u$ begins at one end of the cable, and examine the how taking $\epsilon$ to zero affects the convergence rate.
+Figure 3B shows that the convergence rate slows dramatically as $\epsilon$ decreases.
+The convergence rate is determined by the smallest magnitude, non-zero eigenvalue of the system (see Methods), which can be thought of as a rate-limiting step or process for the system.
+Simulations confirmed this analysis and showed that the convergence rate diverges to infinity as $\epsilon$ approaches zero (Fig. 3C).
+
+\begin{figure}[!tb]
+\begin{center}
+\includegraphics[width=0.9\columnwidth]{03_convergence.png}
+\caption{ Convergence to steady-state is slow when molecules must be transported across bottlenecks ---compartments with low target levels.
+\textbf{(A)} A three-compartment transport model, with the middle compartment acting as a bottleneck. The vertical bars represent the desired steady-state level of cargo in each compartment. The rate of transport into the middle compartment is small ($\epsilon$, dashed harpoons) relative to transport out of the middle compartment.
+\textbf{(B)} As $\epsilon$ decreases, the model converges more slowly and the steady-state level decreases in the middle compartment.
+\textbf{(C)} Simulations (black dots) confirm that the time to convergence is given by the smallest non-zero eigenvalue of the system (analytically calculated line). This eigenvalue can be thought of as the rate-limiting step of the system.
+\textbf{(D)} Convergence ($L_1$ distance) to a uniform target distribution (red line) is faster than a target distribution containing a bottleneck (blue line) in the CA1 model.
+\textbf{(E)} For all compartments that reach a threshold level ($u_i = 0.001$), the simulated time it takes to reach threshold is plotted against the distance of that compartment to the soma.
+\textbf{(F)} Predicted convergence times for various target distributions (\textit{str. rad.}, stratum radiatum; \textit{str. lac.}, stratum lacunosum/moleculare).}
+\end{center}
+\end{figure}
+
+We then asked whether the intuition from this three-compartment model extended to a cell with realistic morphology.
+We obtained qualitatively similar results.
+The CA1 model converged to a uniform target distribution more quickly than to a ``bottleneck" target distribution, in which the middle third of the apical dendrite had low steady-state levels of cargo (Fig. 3D).
+Each pair of anterograde and retrograde rate constants were normalized to sum to one; thus, differences in convergence were not due to the scale of the trafficking rate constants.
+
+In addition to this global view of convergence (Fig. 3D), we considered how the transport bottleneck affected transport to individual dendritic compartments.
+Consider a scenario where transported cargo produces a local chemical reaction after a certain quantity of cargo accumulates; for example, a recently potentiated synapse might be stabilized after enough plasticity-related factors are delivered from the soma.
+Figure 3E plots the duration of time it took for $u_i$ to reach a pre-defined threshold for each compartment as a measure of the local transport delay.
+As expected, introducing a bottleneck caused much longer delays to compartments distal to that bottleneck (Fig. 3E, upper right portion of plot).
+The presence of a bottleneck \textit{shortens} the transport delay to proximal compartments, compared to the uniform target distribution (Fig. 3E, lower left portion of plot).
+This occurs because cargo delayed by the bottleneck spreads throughout the proximal compartments, reaching higher levels earlier in the simulation.
+We observed qualitatively similar results for different local threshold values (data not shown).
+
+The model predicts that transport to distal compartments is quickened by increasing the steady-state level of cargo in the proximal compartments (Fig. 3E).
+This might be experimentally tested by measuring the convergence time of a retrogradely transported molecule that aggregates at recently activated synapses, such as \textit{Arc} mRNA (\citet{Steward_1998}, see discussion).
+To illustrate this in the model CA1 cell, we characterized the time course of transport to the distal apical dendrite (stimulating stratum lacunosum/moleculare), proximal apical dendrite (stimulating stratum radiatum), entire apical dendrite (stimulating both layers), and entire cell (seizure). Notably, the model converges more slowly to distal input alone, than to paired distal and proximal input, or to an entirely uniform input distribution (Fig. 3F).
+
+\subsection*{Microtubular trafficking, detachment and degradation on separated time scales}
+
+We have so far considered how a target distribution of cargo can be generated by modulating the local rates of molecular motors.
+However, while certain types of molecular cargo stay on the microtubule network (e.g. mitocondria), many kinds of cargo must detach from the microtubules in order to be used at their final location.
+For example, dendritic mRNAs are transported along microtubules within densely-packed granules, and are released following granule disassembly \citep{Krichevsky_2001,Buxbaum_2014a}.
+In this case, and in other cases where the cargo is disassembled or sequestered, it is reasonable to model detachment from the microtubule as an irreversible process, followed by an eventual degradation.
+
+This conceptual picture, in which local mechanisms of transport and delivery conspire to determine the expression pattern of cargo, has been called the ``sushi-belt model'' of transport \citep{Doyle_2011}. We study this idea formally with the following mass-action scheme:
+\begin{equation}
+\begin{array}{cccccccc}
+u_1 & \overset{a_1}{\underset{b_1}{\rightleftharpoons}} &
+u_2 & \overset{a_2}{\underset{b_2}{\rightleftharpoons}} &
+u_3 & \overset{a_3}{\underset{b_3}{\rightleftharpoons}} &
+u_4 & \overset{a_4}{\underset{b_4}{\rightleftharpoons}} ...
+\\
+c_1 \Bigg\downarrow \phantom{c_1} & &
+c_2 \Bigg\downarrow \phantom{c_2} & &
+c_3 \Bigg\downarrow \phantom{c_3} & &
+c_4 \Bigg\downarrow \phantom{c_4} & 
+\\
+u_1^\star &  &
+u_2^\star &  &
+u_3^\star &  &
+u_4^\star &   
+\\
+d_1 \Bigg\downarrow \phantom{d_1} & &
+d_2 \Bigg\downarrow \phantom{d_2} & &
+d_3 \Bigg\downarrow \phantom{d_3} & &
+d_4 \Bigg\downarrow \phantom{d_4} & 
+\\
+\varnothing &  &
+\varnothing &  &
+\varnothing &  &
+\varnothing &  
+\end{array}
+\end{equation}
+As before, a molecule $u$ is transported along a network of microtubules (top row, in equation 6).
+In each compartment, molecules can irreversibly detach from the microtubules in a reaction $u_i \xrightarrow{c_i} u_i^\star$, where $u^\star$ denotes the biochemically active or released form of cargo.
+The final reaction, $u_i^\star \xrightarrow{d_i} \varnothing$, models degradation in each compartment.
+Note that only $u^\star$ is subject to degradation; the molecule is assumed to be protected from degradation during transport.
+This model can be extended to branched morphologies (Fig. 3A).
+
+\begin{figure}[!tb]
+\begin{center}
+\includegraphics[width=0.9\columnwidth]{04_sushi_belt.png}
+
+\caption{Multiple strategies for transport in a model including nonuniform microtubular detachment/activation.
+\textbf{(A)} Schematic of microtubular transport model with irreversible detachment in a branched morphology. The localized degradation reactions ($u^{\star}_i \xrightarrow{d_i} \varnothing$) are omitted for clarity.
+\textbf{(B)} Multiple strategies for producing a desired distribution of detached cargo ($\tilde{u}^{\star}$). When the timescale of detachment/delivery is sufficiently slow, the distribution of cargo on the microtubules approaches a quasi-steady-state (transport step). This known distribution can then be transformed into the desired distribution for $\tilde{u}$ (detachment step). As long as these two steps are appropriately matched (blends of blue), then the desired distribution will be achieved (CA1 cell, right).
+\textbf{(C-E)} Quasi-steady-state distributions of $u$ (red), $u^\star$ (blue), and $\tilde{u}^\star$ (black) for the various strategies diagrammed in panel B (see circled red numbers). }
+\end{center}
+\end{figure}
+
+One way to analyze this system is to assume that these three processes --- trafficking, detachment, and degradation --- occur on separate timescales.
+If trafficking is sufficiently faster than detachment ($a,b \gg c$), then $u$ approaches a quasi-steady state distribution defined by our previous analysis (equation 3).
+We then choose detachment rate constants that transform the microtubular distribution into our desired distribution for $u^\star$:
+\begin{equation}
+c_i \propto \frac{\tilde{u}^\star_i}{\tilde{u}_i}
+\end{equation}
+Here, $\tilde{u}$ and $\tilde{u}^\star$ respectively denote the quasi-steady state distributions for $u$ and $u^\star$, respectively.
+As long as degradation is sufficiently slow ($c \gg d$) the desired distribution is transiently achieved.
+
+The addition of spatially varied detachment rates ($c_i$) produces new strategies for achieving a desired distribution of cargo (Fig. 4B).
+First, the strategy introduced in figure 2 can be reproduced in this expanded model: the transport rates ($a_i$,$b_i$) are chosen according to equation (3) and the detachment rate constants are spatially uniform ($c_i =$ constant, with $c \ll a,b$).
+In this case, the desired spatial distribution is first achieved both along the microtubules (red line, Fig. 4C) and then for the detached/activated cargo (blue line, Fig. 4C).
+
+A second strategy begins by choosing uniform transport rates ($a_i = b_i$). This evenly distributes cargo throughout the dendritic tree. The desired distribution is then achieved by locally delivering cargo at a rate proportional to the desired level ($c_i \propto \tilde{u}^\star_i$; Fig 4D). Unlike the first solution, this strategy avoids the transport bottlenecks examined in Figure 3, and can achieve target patterns with $\tilde{u}^\star$ equal to zero in certain compartments by setting $c_i = 0$. 
+
+We refer to the first strategy (Fig. 4C) as the ``specific'' trafficking model, because cargo is selectively transported to target sites.
+We refer to the second strategy (Fig. 4D) as the ``uniform'' trafficking model, because cargo is uniformly distributed throughout the dendrite.
+These two strategies represent extremes on a spectrum of possible models (Fig. 4B).
+Figure 4E shows the behavior of an intermediate model, whose parameters are a linear interpolation between the extreme strategies shown in Figure 4C and 4D.
+Thus, effective trafficking systems can be described as a spectrum of strategies that may be suited to different situations and purposes (see Discussion). 
+
+\subsection*{Non-specific cargo delivery occurs when trafficking and detachment occur on similar timescales}
+
+We have demonstrated possible strategies for neurons to achieve precise and flexible transport of cargo by assuming that cargo detachment is sufficiently slow relative to trafficking.
+However, biological neurons are unlikely to require perfect matching between demand and distribution of cargo and may therefore tolerate loss of precision in order to speed up delivery globally.
+We therefore examined the consequences of relaxing the separation of time scales between transport and detachment.
+%In general, this improves the speed at which cargoes are delivered to synapses, but decreases the accuracy of delivery.
+
+\begin{figure}[!tb]
+\begin{center}
+\includegraphics[width=0.9\columnwidth]{05_heterosynaptic_ca1.png}
+\caption{Proximal synapses capture more cargo at the expense of distal synapses when detachment rates are n\"iavely increased.
+\textbf{(A)} Delivery of cargo to the distal apical zone with slow \textit{(left)} and fast detachment rates \textit{(right)}. The achieved pattern does not match the target distribution when detachment is fast, since some cargo is erroneously delivered to proximal sites. \textbf{(B)} Tradeoff curves between non-specificity and convergence rate for two trafficking strategies (blue line, see Fig 4D; red line, see Fig 4C). \textbf{(C-D)} Same as \textbf{(A-B)} but for intended cargo delivery to the entire apical tuft.
+}
+\end{center}
+\end{figure}
+
+Returning to the model of Figure 4, we consider a scenario where distal synaptic inputs on the apical tuft are stimulated (Fig. 5A).
+If the average detachment rate constants are sufficiently slow, then, as before, cargo is delivered selectively to the stimulated region (Fig. 5A, left).
+If we increase the detachment rates by a uniformly scaling, some cargo ``leaks off'' the microtubule path on its way to the distal synapses (Fig. 5A, right).
+We refer to this as a ``non-specific'' delivery of cargo, since cargo is not selectively delivered to the stimulated sites.
+Thus, speeding up detachment relative to transport improves the overall rate at which cargoes are delivered to synapses, but this comes at the cost of decreased accuracy of delivery.
+%For this stimulation pattern, non-specificity might induce on-the-path synaptic plasticity; a possibility that has some experimental evidence \citep{Han_2013}.
+
+Tradeoff curves between the average detachment rate constant and the non-specificity of transport for this stimulation pattern are shown in figure 5B.
+Importantly, this tradeoff exists for both trafficking strategies we examined in figure 4 --- the selective transport strategy (see Fig 4D) and uniform transport strategy (see Fig. 4C).
+For this stimulation pattern, the uniform trafficking strategy (Fig. 5B, blue line) outperforms the specific trafficking strategy (Fig. 5B, red line) since the latter suffers from bottleneck in the proximal apical zone.
+
+The pattern of non-specific delivery is stimulation-dependent.
+When the entire apical tree is stimulated, fast detachment can result in a complete occlusion of cargo delivery to distal synaptic sites (Fig. 5C).
+As before, a tradeoff between specificity and delivery speed is present for both transport strategies (Fig. 5D).
+Interestingly, the specific trafficking strategy outperforms the uniform trafficking strategy in this case (in contrast to Fig. 5A-B).
+This is due to the lack of a bottleneck, and the fact that the uniform trafficking strategy initially sends cargo to the basal dendrites where it is not released.
+
+Together, these results show that an increase in the efficiency of synaptic cargo delivery comes at the cost of loss of specificity and that the final destination of mis-trafficked cargo depends on the pattern of stimulation.
+We next asked whether we can tune the kinetic parameters of the transport mechanism to find an ideal compromise between precision and trafficking efficiency.
+
+\subsection*{Transport can be optimized for both speed and precision for a given stimulation pattern}
+
+In figure 5, we showed that scaling the detachment rates ($c_i$), while leaving the transport rates ($a_i$, $b_i$) fixed produces a proximal bias in cargo delivery.
+That is, synapses closer to the soma are more likely to capture cargo at the expense of distal synapses.
+We reasoned that increasing the anterograde transport rate of cargo could correct for this bias, producing transport rules that are both fast and precise.
+
+We examined this possibility in a reduced model --- an unbranched cable --- so that we could develop simple heuristics that precisely achieve a desired distribution of cargo while minimizing the convergence time.
+In this model, cargo begins on the left end of the cable and is transported to a number of synaptic delivery sites, each of which is modeled as a double-exponential curve.
+We also restricted ourselves to investigating the uniform trafficking strategy (Fig. 4D); a similar analysis could in principle be done for the specific trafficking strategy.
+
+\begin{figure}[!tb]
+\begin{center}
+\includegraphics[width=0.9\columnwidth]{06_heterosynaptic_cable.png}
+\caption{Tuning the model for speed and specificity is sensitive to the target distribution of cargo.
+\textbf{(A-C)} Cargo begins on the left end of an unbranched cable, and is ideally distributed equally amongst a number recently stimulated synaptic sites (black arrows). Steady-state cargo profiles (red) for three stimulation patterns (black arrows) along an unbranched cable. The dotted black line corresponds to the `target' steady-state level at each delivery site.
+\textbf{(A)} When the timescale of detachment is sufficiently slow, cargo can be evenly distributed to the synapses regardless of their number and position. Transport parameters were set according to the procedure shown in figure 4D.
+\textbf{(B)} When detachment is n\"iavely increased (all rates multiplicatively scaled) a proximal bias in the steady-state distribution of cargo across all stimulation patterns.
+\textbf{(C)} Transport rate constants, $a_i$ and $b_i$, were tuned to optimize the distribution of cargo to six equally spaced synapses (top row); detachment rate constants were the same as in panel B. Changing the number of synapses (middle row) or the position of the synapses (bottom row) causes the unequal distribution of cargo to synapses.
+\textbf{(D)} Tradeoff curves between non-specificity and convergence rate for six evenly spaced synapses (top row of A-C). The curve shifts to the left and becomes non-monotonic as the anterograde bias ($\beta$) increases.
+\textbf{(E)} Tradeoff curves for two levels of anterograde bias on multiple simulations; for each simulation six synapse positions were drawn from random uniform distribution over the length of the cable.
+\textbf{(F)} Same as panel E, except each the number of synapses was randomly chosen between 3 to 9 for each simulation.
+}
+\end{center}
+\end{figure}
+
+As before, cargo can be precisely delivered to a variety of stimulation patterns when the detachment rate is sufficiently slow (Fig. 6A); when the detachment rate is n\"iavely increased to speed up the rate of delivery, a proximal bias develops for all stimulation patterns (Fig. 6B).
+
+We then hand-tuned the transport rate constants to deliver equal cargo to six evenly spaced synaptic sites (top row of Fig. 6C).
+Specifically, we increased the anterograde rate constants ($a_i$) and decreased the retrograde rate constants ($b_i$) by a decreasing linear function of position so that $a_{N-1} = b_{N-1}$ at the right side of the cable.
+On the left end of the cable, we set $a_1 = 0.5 + \beta$ and $b_1 = 0.5 - \beta$, where $\beta$ is the parameter controlling anterograde bias.
+Intuitively, the profile of the proximal delivery bias is roughly exponential (Fig. 6B, top pattern), and therefore the anterograde rates need to be tuned more aggressively near the soma (where the bias is most pronounced), and more gently tuned as the distance to the soma increases.
+
+However, this tuned model does not precisely deliver cargo for other stimulation patterns.
+For example, when the number of synapses on the cable is decreased, a distal delivery bias develops because too little cargo is released on the proximal portion of the cable (middle row, Fig. 6C).
+Even when the number of synapses is held constant, changing the position of the synapses can disrupt equitable delivery of cargo to synapses. This is shown in the bottom row of figure 6C, where a distal bias again develops after the majority of activated synapses are positioned proximally.
+Thus, within the simple framework we've developed, the delivery of cargo can be tuned to achieve both precision and speed for a specified target distribution.
+However, non-specific cargo delivery occurs when different stimulation patterns are applied (assuming the transport parameters are not re-tuned).
+
+To examine these observations over a larger range of stimulation patterns and transport parameters, we plotted tradeoff curves between delivery precision and speed.
+We first examined a cable with six evenly spaced delivery sites (same as top row of Fig. 6A-C).
+As before, a hard tradeoff between specifity and delivery speed exists for the untuned model (blue line in Fig. 6D, same transport rate constants as Fig. 6A and 6B).
+As the anterograde transport bias is introduced and increased, the optimal points along the tradeoff curve move to the left, representing faster transport times.
+The tradeoff curves also become nonmonotonic: the error (non-specificity) initially decreases as the detachment rate decreases, but begins to increase after a certain well-matched point.
+Points on the descending left branch of the curve represent cargo distributions with proximal bias (detachment is too fast); points on the ascending right branch correspond to distal bias (detachment is too slow).
+
+We observed qualitatively similar tradeoff curves for randomly positioned synapses (Fig. 6E), and for randomizing the number and position of synapses (Fig. 6F). There is substantial variability in the tradeoff curves in both cases, but particularly when randomizing the number of synaptic inputs (Fig. 6F). Notably, the untuned transport model (blue curves) always converge to zero error as the detachment rate decreases. Thus, for this model, it appears that the only way to achieve very precise, reliable and flexible transport is to have a slow detachment rate.
+
+\section*{Discussion}
+
+A microscope image of a typical dendritic tree hints at the complex logistical task that the neuron must solve to maintain synapses and alter them during development and learning.
+Synapses, such as the extensively-studied excitatory synapses of the mammalian nervous system, comprise hundreds of different proteins, including receptors, structural and anchoring proteins, and cytosolic signaling enzymes \citep{Liu2014,Lassek2015}.
+How do these components find their way to the synapse, and how do synapses that have varying demands for these components receive an appropriate supply?
+
+A large experimental literature addresses the molecular mechanisms underlying this question, and several reviews have outlined a two-step model in which molecular cargo first samples the dendritic arbor by a noisy walk, before its eventual release or capture \citep{Welte2004,Buxbaum_2014b,Buxbaum2015}.
+Both stages of transport are thought to be influenced by localized signaling pathways, rather than being pre-determined by a precise molecular address.
+The signaling pathways affecting transport require further characterization and discovery; candidate second-messengers include calcium \citep{Wang_2009}, ADP \citep{Mironov_2007}, and microtubule-associated proteins \citep{Soundararajan_2014}.
+
+Our goal was to formulate conceptual accounts of activity-dependent transport as mathematical models to test their feasibility and examine relationships between the speed, flexibility and specificity of cargo delivery.
+%We aimed to examine the validity and biological consequences of these conceptual models in computational and theoretical detail, while remaining agnostic to biophysical parameters that require further study.
+A primary question we asked was whether a transport system based on purely local rules was feasible, or whether a complex global addressing system was required.
+%One might na\"ively expect that elaborately branched dendritic morphologies obfuscate the relationship between local mechanisms and the global distribution of molecular cargo. However, 
+We showed that local rules can produce arbitrarily precise and flexible cargo delivery provided that the release of cargo occurs on a slow enough timescale.
+Intuitively, this requirement means that the cargo has time to sample the dendritic tree for potential delivery sites \citep{Welte2004}.
+Similar decentralized strategies are utilized by other biological systems, such as ant colonies, which converge onto a common path during exploration based on localized trail-laying and -following decisions made by a distributed population of agents \citep{Deneubourg_1990}.
+Such self-organizing systems often enjoy a number of advantageous properties -- including scalability, flexibility, and fault-tolerance -- and are therefore a current topic of substantial interest to engineers \citep{Werfel2014,Rubenstein2014}.
+
+Cargo does not need to search the dendritic tree for target sites in a uniform or unbiased manner.
+We showed that the same distribution of cargo could be achieved by (a) specific microtubular transport followed by uniform release, (b) from uniform transport followed by specific release, or (c) a combination of these strategies (Fig. 4).
+Experimental findings are variable across systems and span these possibilities.
+For example, \cite{Kim_2015} identified three mRNAs that were uniformly distributed throughout cultured \textit{Aplysia} sensory neurons, but were targeted to synapses at the level of protein expression by localized translation.
+In contrast, the nonuniform expression of \textit{Arc} mRNA is closely matched to the pattern of Arc protein in granule cells of the dentate gyrus \citep{Steward_1998,Farris_2014, Steward_2015}.
+Even the same type of molecular cargo can show diverse movement statistics in single-particle tracking experiments \citep{Dynes_2007}.
+
+Given that different strategies are feasible and appear to be represented in biological neurons, it is important to know the pros and cons of a given strategy, and the general tradeoffs that exist in a transport mechanism that uses local signals.
+One experimentally testable phenomenon seen in the model is the emergence of bottlenecks that arise when cargo is trafficked nonuniformly; for example, when distal regions require high levels of cargo and proximal regions require low levels (Fig. 3).
+Other forms of trafficking bottlenecks can be experimentally induced by expressing kinesin at high densities to induce molecular crowding \citep{leduc2012molecular}. An important open question is whether trafficking bottlenecks and crowding events occur as part of normal physiology, and whether severe activity-induced bottlenecks might underlie pathophysiological states.
+%Uniformly distributing cargo and relying on local capture can circumvent activity-induced bottlenecks, leading to faster convergence for certain target distributions of cargo.
+%An additional consideration, not examined in detail here, is whether the distribution of cargo needs to be stable over long time periods or be dynamic and responsive to changes in synaptic input.
+%We also focused our analysis on the transport of transiently expressed cargo (e.g. factors produced in response to high synaptic input), rather than cargo that is constitutively expressed and, in some cases, differentially captured or synthesized across the dendritic tree \hl{(CITE)}.
+
+We showed that having sufficiently slow capture of cargo can produce a well-behaved transport system that matches demand using local mechanisms and is not sensitive to the complex geometry of the neuron.
+Mathematically, this regime occurs when the system contains two separated timescales, so that the distribution of cargo along the microtubules approaches a quasi-steady-state that matches the long-term average of local demand.
+However, because the transport of certain cargo is time-sensitive \citep{Frey_1997,Frey_1998}, we asked whether the model could maintain precise delivery while relaxing the restriction of slow detachment.
+We found that increasing the rate of detachment produces a proximal bias in the delivery of cargo, leading to a mismatch between supply and demand across a population of synapses.
+%; this behavior, while intuitive at a high level, is complex and difficult to analytically characterize in complex morphologies.
+Thus, models with separated timescales between transport and detachment face a tradeoff between the speed and specificity of cargo delivery. 
+
+We then asked whether a different family of models might circumvent this tradeoff by globally tuning the anterograde and retrograde movement rates. Studies show that a directional bias in transport can be induced by changing the complement of motor proteins \citep{Kanai2004,Amrute2012}, and that such a change might be induced at the soma in response to synaptic activity \citep{Puthanveettil_2008}. We showed, in a simple unbranched model, that increasing the anterograde transport rate can precisely overcome the proximal bias in cargo delivery, and therefore provide both fast and precise transport for a particular target distribution of cargo (Fig. 6).
+
+However, tuning trafficking bias to counterbalance leakage does not provide a completely general solution to the speed/specificity tradeoff in a biologically realistic situation. First, anterograde rate constants need to be tuned non-uniformly over the cable. In the cases we studied, we used a linearly decreasing profile (see \textit{Methods}). It is unclear whether real neurons are capable of globally tuning their trafficking rates in a non-uniform manner. Simply changing the composition of motor proteins \citep{Amrute2012} is unlikely induce a spatial profile in transport bias. On the other hand, non-uniform modulation of the microtubule network or expression of microtubule-associated proteins provide potential mechanisms \citep{Kwan2008,Soundararajan_2014}. It would therefore be intriguing to experimentally test the existence of spatial gradients in anterograde movement bias, for example, using single-particle tracking in living neurons.
+
+Secondly, tuning transport bias can provide fast and rapid cargo delivery for a specific density and arrangement of synapses along a dendrite, but we showed that this tuned solution will not be optimal for different densities and spatial distributions of synapses, as seen in Figure 6. The overall morphology of the neurites may also need to be taken into account, as introducing an anterograde bias can cause the accumulation of cargo at the tips of short branches, proximal to the soma (data not shown). However, other mechanisms, not modeled in this study, might prevent this accumulation \citep{Soundararajan_2014}. Certain neuron types in specific brain regions may nonetheless have morphology and synaptic connectivity that is sufficiently stereotyped to permit some degree of tuning. In such cases the qualitative prediction that anterograde bias should decrease as a function of distance to the soma can be tested. Such tuning, while providing improved efficiency in trafficking intracellular cargo, would also constitute a site of vulnerability to perturbations that alter synapse density and reflect an additional constraint on the possibilities for wiring and re-wiring neural circuits.
+
+\section*{Methods}
+
+All simulation code is available on: https://github.com/ahwillia/Williams-etal-Synaptic-Transport
+
+\subsection*{Model of single-particle transport}
+
+Let $x_n$ denote the position of a particle along a 1-dimensional cable at timestep $n$. Let $v_n$ denote the velocity of the particle at timestep $n$; for simplicity, we assume the velocity can take on three discrete values, $v_n = \{-1,0,1\}$, corresponding to a retrograde movement, pause, or anterograde movement. As a result, $x_n$ is constrained to take on integer values. In the memoryless transport model (top plots in Fig. 1B, 1D, and 1F), we assume that $v_n$ is drawn with fixed probabilities on each step. The update rule for position is:
+$$x_{n+1} = x_n + v_n$$
+$$v_{n+1} = \left\{\begin{matrix}
+-1 & \text{with probability } p_-\\ 
+0 & \text{with probability } p_0\\  
+1 & \text{with probability } p_+
+\end{matrix}\right.$$
+
+We chose $p_- = 0.2$, $p_0 = 0.35$ and $p_+ = 0.45$ for the illustration shown in Figure 1. For the model with history-dependence (bottom plots in Fig. 1B, 1D, and 1F), the movement probabilites at each step depend on the previous movement. For example, if the motor was moving in an anterograde direction on the previous timestep, then it is more likely to continue to moving in that direction in the next time step. In this case the update rule utilizes \textit{conditional} probabilities:
+$$v_{n+1} = \left\{\begin{matrix}
+-1 & \text{with probability } p(-|v_n)\\ 
+0 & \text{with probability } p(0|v_n)\\  
+1 & \text{with probability } p(+|v_n)
+\end{matrix}\right.$$
+
+In the extreme case of history-dependence, the particle always steps in the same direction as the previous time step.
+\begin{center}
+  \begin{tabular}{ l | c  c  c }
+    & $v_n=-1$ & $v_n=0$ & $v_n=1$ \\
+    \hline
+    $p(v_{n+1} = -1)$ & $1$ & $0$ & $0$ \\ 
+    $p(v_{n+1} = 0)$  & $0$ & $1$ & $0$ \\ 
+    $p(v_{n+1} = 1)$  & $0$ & $0$ & $1$ \\
+    \hline
+  \end{tabular}
+\end{center}
+We introduce a parameter $k \in [0,1]$ to linearly interpolate between this extreme case and the memoryless model. The bottom plots of figure 1B, 1D were simulated with $k=0.5$; in the bottom plot of figure 1F, a mass-action model was fit to these simulations.
+
+\subsection*{Relationship of single-particle transport to the mass-action model}
+
+The mass-action model (equation 1, in the \textit{Results}) simulates the bulk movement of cargo $u$ across discrete compartments. The rate of cargo transfer is modeled as elementary chemical reactions \citep{Keener_1998}. For an unbranched cable, the change in cargo in compartment $i$ is given by:
+\begin{equation}
+\dot{u}_i = a u_{i-1} + b u_{i+1} - (a+b)u_i
+\end{equation}
+For now, we assume that the anterograde and retrograde trafficking rate constants ($a$ and $b$, respectively) are spatially uniform.
+
+The mass-action model approximates the drift-diffusion partial differential equation (Fig. 1E) by discretizing $u$ into spatial compartments. This can be seen by Taylor expanding around some position $u(x)$:
+$$
+\begin{align}
+\dot{u}(x) &
+\approx a\left[u(x) - \Delta \frac{\partial u}{\partial x} + \frac{\Delta^2}{2} \frac{\partial^2 u}{\partial x^2} \right] + b\left[u(x) + \Delta \frac{\partial u}{\partial x} + \frac{\Delta^2}{2} \frac{\partial^2 u}{\partial x^2} \right] - (a+b)~u(x) \\
+ & = a\left[- \Delta \frac{\partial u}{\partial x} + \frac{\Delta^2}{2} \frac{\partial^2 u}{\partial x^2} \right] + b\left[\Delta \frac{\partial u}{\partial x} + \frac{\Delta^2}{2} \frac{\partial^2 u}{\partial x^2} \right]
+\end{align}
+$$
+where $\Delta$ is the compartment size. In the limit $\Delta \rightarrow 0$, we arrive precisely at the drift-diffusion equation.
+$$
+\dot{u}(x) = \frac{\partial u}{\partial t} = \underbrace{(b-a)}_{\text{drift coefficient}} \frac{\partial u}{\partial x} + \underbrace{\left(\frac{a+b}{2}\right)}_{\text{diffusion coefficient}} \frac{\partial^2 u}{\partial x^2}
+$$
+When all cargo starts in one location (i.e. the initial condition is a delta function), then the distribution after some elapsed time will be a Gaussian function. The mean of this Gaussian function changes in direct proportion to the drift coefficient over time, while the variance is inversely proportional to the diffusion coefficient \hl{(CITE?)}.
+
+How does this equation relate to the model of single-particle transport (Fig. 1A-B)? For a memoryless biased random walk, the expected position of a particle after $n$ time steps is $E[x_n] = n(p_+ - p_-)$ and the variance in position after $n$ steps is $n \left( p_+ + p_- - (p_+ - p_-)^2 \right)$. For large numbers of independently moving particles (i.e. assuming \textit{ergodicity}), the ensemble of cargo will approach a Gaussian distribution by the Central Limit Theorem. This means that the mean and variance calculations for a single particle can be directly related to the ensemble statistics outlined in the previous paragraph. We find:
+$$
+a = \frac{2p_+ - (p_+ - p_-)^2}{2}
+$$
+$$
+b = \frac{2p_- - (p_+ - p_-)^2}{2}
+$$
+
+The above analysis changes slightly when the single-particle trajectories contain long, unidirectional runs. The expected position for any particle is the same $E[x_n] = n(p_+ - p_-)$; the variance, in contrast, increases as run lengths increase. However, the mass-action model can often provide a good fit in this regime with appropriately re-fit parameters (see Fig. 1F). As long as the single-particles have stochastic and identically distributed behavior, the ensemble will be well-described by a normal distribution by the central limit theorem. This only breaks down in the limit of very long unidirectional runs, as the system is no longer stochastic.
+
+\subsection*{Steady-state analysis of the mass-action model}
+
+Many of our results take advantage of the fact that the steady-state ratio of cargo in two neighboring compartments equals the ratio of trafficking rate constants (equation 3). We prove this result for a cable with non-uniform anterograde and retrograde rate constants. Examining the left end of the cable at steady-state ($\dot{u}_i = 0$), we immediately verify our result:
+$$
+-a_{1} u_{1} + b_{1} u_2 = 0 ~\Rightarrow~ \frac{u_1}{u_2} \Bigg |_{ss} = \frac{b_1}{a_1}
+$$
+Successively applying the same logic down the cable confirms the condition in equation 2 holds globally. A similar procedure (starting at the tips and moving in) can be applied to branched morphologies to prove the more general condition.
+
+% The same result can be shown in a branched tree morphology. Here, each compartment has exactly one parent, but can have multiple children at branch points. Consider a parent-child pair of compartments, $u_p$ and $u_c$, with anterograde/retrograde transport rate constants $a$ and $b$. At steady-state, there is no net flux between $u_c$ and its children:
+% $$
+% \dot{u}_c = a u_p - b u_c + \underbrace{\sum_j (b_j u_j - a_j u_c)}_{= 0 \text{ , at ss}}
+% $$
+% Thus, we have:
+% $$
+% \dot{u}_c = a u_p - b u_c = 0 ~\Rightarrow~ \frac{u_p}{u_c} \Bigg |_{ss} = \frac{b}{a}
+% $$
+
+It is helpful to re-express the model as a matrix differential equation, $\mathbf{\dot{u}} = A \mathbf{u}$, where $\mathbf{u} = \left[ u_1, u_2, ... u_N \right]^T$ is the state vector, and $A$ is the state-transition matrix. For a general branched morphology, $A$ will be nearly tridiagonal, with off-diagonal elements corresponding to branch points; matrices in this form are called Hines matrices \citep{Hines_1984}. For the simpler case of an unbranched cable, $A$ is tridiagonal:
+$$
+A = 
+ \begin{bmatrix}
+  ~-a_1~  & b_1      & 0         &         & ...              & 0        \\
+   a_1    & -b_1-a_2 & b_2       &  0      &                  &          \\
+   0      &  a_2     & -b_2-a_3  & ~~~ b_3~~~  & \ddots     & \vdots   \\
+   \vdots &  0       & a_3       & \ddots  &                  & 0        \\
+          &          & \ddots    &         & -b_{N-2}-a_{N-1} & b_{N-1}  \\
+   0      &          & ...       &  0      & a_{N-1}          & ~-b_{N-1}~
+ \end{bmatrix}
+$$
+For both branched and unbranched morphologies, each column of $A$ sums to zero, which reflects conservation of mass within the system. The rank of $A$ is exactly $N-1$ (this can be seen by taking the sum of the first $N-1$ rows, which results in $-1$ times the final row). Thus, the nullspace of $A$ is one-dimensional (red lines in Supp. Fig. 1).
+
+The desired steady-state distribution, $\mathbf{\tilde{u}}$, is an eigenvector that spans the nullspace of $A$. It is simple to show that all other eigenvalues $A$ are negative using the Gershgorin circle theorem; thus, the fixed point described by equation 3 is stable. The convergence rate is determined by the non-zero eigenvalue with smallest magnitude of $A$. 
+%We can increase the convergence rate (while still achieving $\mathbf{\tilde{u}}$) by multiplying all rate constants by some common value. However, this trivial strategy ignores the fact that there are biophysical limits on how fast molecular motors can move.
+
+\subsection*{Stochastic interpretation of the mass-action model}
+
+The mass-action model described in figure 2 is a deterministic dynamical system. However, this determinism only holds in the limit of having a large number of transported particles. Cargoes with small copy numbers (e.g. mitocondria) will operate in a stochastic regime. We evoke a standard assumption that the system is \textit{ergodic}, meaning that position of one particle averaged over very long time intervals is the same as the ensemble steady-state distribution. 
+
+Thus, in addition to modeling how the spatial distribution of cargo changes over time, the mass-action model equivalently models the spatial probability distribution of a single cargo. That is, imagine we track a single cargo and ask its position after a long period of transport. The probability ratio between of finding this particle in any parent-child pair of compartments converges to:
+$$
+\frac{p_p}{p_c} \bigg|_{ss} = \frac{b}{a}
+$$
+which mirrors our analysis of the deterministic model.
+
+At steady-state, the number of molecules in any single compartment follows a binomial distribution; the coefficient of variation in each compartment is given by:
+$$
+\sqrt{\frac{1-p_i^{(ss)}}{n~p_i^{(ss)}}}
+$$
+This suggests that there are two ways of decreasing noise in the system. First, increasing the number of transported molecules, $n$, decreases the noise by a factor of $1/\sqrt{n}$. Additionally, transport is more reliable to compartments with a high steady-state occupation probability.
+
+\subsection*{Incorporating detachment and degradation into the mass-action model}
+
+Introducing detachment and degradation reactions into the transport model is straightforward. For an arbitrary compartment in a cable, the differential equations become:
+$$
+\begin{array}{lcl}
+\dot{u}_i & = & a_{i-1} u_{i-1} - (a_i+b_{i-1}+c_i) u_i + b_i u_{i+1} \\
+\dot{u}_i^\star & = & c_i u_i - d_i u_i^\star
+\end{array}
+$$
+
+When $a_i,b_i \gg c_i \gg d_i$, then the variables $u_i$ and $u_i^\star$ approach a quasi-steady-state, which we denote $\tilde{u}_i$ and $\tilde{u}_i^\star$. For simplicity we assume $d_i = 0$ in our simulations. We present two strategies for achieving a desired distribution for $\tilde{u}_i^\star$ in figure 4C and 4D. To interpolate between these strategies, let $F$ be a scalar between 0 and 1, and let $\tilde{u}^\star$ be normalized to sum to one. We choose $a_i$ and $b_i$ to achieve:
+$$
+\tilde{u}_i = F~\tilde{u}_i^\star + (1-F)/N 
+$$
+along the microtubular network and choose $c_i$ to satisfy
+$$
+c_i \propto \frac{\tilde{u}_i^\star}{F~\tilde{u}_i^\star + (1-F)/N} 
+$$
+
+Here, $N$ is the number of compartments in the model. Setting $F=1$ results in the simulation in the ``specific'' trafficking model (Fig. 4C), while setting $F=0$ results in the ``uniform'' trafficking model (Fig. 4D). An interpolated strategy is shown in figure 4E ($F=0.3$).
+
+\subsection*{Globally tuning transport rates to circumvent the speed-specificity tradeoff}
+
+We investigated the ``uniform'' trafficking model with fast detachment rates in an unbranched cable with equally spaced synapses and $N = 100$ compartments. Multiplicatively increasing the detachment rates across the cable produced a proximal bias in cargo delivery which could be corrected by setting the anterograde and retrograde trafficking rates to be:
+$$
+a_i = 0.5 + \beta \cdot \frac{N-1-i}{N-2}
+$$
+$$
+b_i = 0.5 - \beta \cdot \frac{N-1-i}{N-2}
+$$
+where $i = \{1,2,...N-1\}$ indexes the trafficking rates from the soma ($i=1$) to the other end of the cable ($i=N-1$). Faster detachment rates require larger values for the parameter $\beta$; note that $\beta < 0.5$ is a constraint to prevent $b_i$ from becoming negative. This heuristic qualitatively improved, but did not precisely correct for, fast detachment rates in the ``specific'' trafficking model (data not shown). 
+
+\section*{Acknowledgements}
+
+\bibliography{transport_refs}
+
+\end{document}
